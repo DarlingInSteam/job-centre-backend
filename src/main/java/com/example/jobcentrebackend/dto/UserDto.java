@@ -9,9 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Employer {
+public class UserDto {
     private long id;
-    private String employerName;
-    private String address;
-    private String phone;
 }

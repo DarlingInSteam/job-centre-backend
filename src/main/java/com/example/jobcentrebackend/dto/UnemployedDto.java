@@ -12,7 +12,7 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class UnemployedDto {
     private long id;
     private String fullName;
     private int age;

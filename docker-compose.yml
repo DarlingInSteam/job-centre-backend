@@ -40,5 +40,5 @@ volumes:
   pgadmin:
 
 networks:
-  aniway-network:
+  job-centre-network:
     driver: bridge

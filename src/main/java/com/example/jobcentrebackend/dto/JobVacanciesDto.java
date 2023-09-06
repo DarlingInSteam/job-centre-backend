@@ -1,6 +1,6 @@
 package com.example.jobcentrebackend.dto;
 
-public class JobVacancies {
+public class JobVacanciesDto {
     private long id;
     private String jobType;
     private String jobTitle;

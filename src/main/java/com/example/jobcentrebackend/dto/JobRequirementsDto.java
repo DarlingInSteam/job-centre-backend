@@ -2,7 +2,7 @@ package com.example.jobcentrebackend.dto;
 
 import com.example.jobcentrebackend.enums.EducationLevel;
 
-public class JobRequirements {
+public class JobRequirementsDto {
     private long id;
     private EducationLevel educationLevel;
     private int[] ageRange;
