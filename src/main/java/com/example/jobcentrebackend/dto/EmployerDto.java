@@ -1,5 +1,6 @@
 package com.example.jobcentrebackend.dto;
 
+import com.example.jobcentrebackend.entity.EmployerEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,5 +14,13 @@ public class EmployerDto {
     private long id;
     private String employerName;
     private String address;
-    private String phone;
+
+    public static EmployerDto toDto(EmployerEntity entity) {
+        return EmployerDto
+                .builder()
+                .id(entity.getId())
+                .employerName(entity.getEmployerName())
+                .address(entity.getAddress())
+                .build();
+    }
 }

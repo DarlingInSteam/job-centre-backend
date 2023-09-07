@@ -24,13 +24,14 @@ CREATE TABLE "users" (
 
 CREATE TABLE "unemployed" (
     "id" SERIAL PRIMARY KEY,
+    "user_id" INT,
     "full_name" VARCHAR(255) NOT NULL,
     "age" INT,
     "passport_number" VARCHAR(20) UNIQUE NOT NULL,
     "passport_issue_date" TIMESTAMP WITHOUT TIME ZONE,
     "passport_issued_by" VARCHAR(255),
     "address" TEXT,
-    "photo" BYTEA,
+    "photo" TEXT,
     "education_level" education_level,
     "educational_institution" VARCHAR(255),
     "education_document_data" VARCHAR(255),
@@ -41,6 +42,7 @@ CREATE TABLE "unemployed" (
 
 CREATE TABLE "employers" (
      "id" SERIAL PRIMARY KEY,
+     "user_id" INT,
      "employer_name" VARCHAR(255) NOT NULL,
      "address" TEXT
 );
@@ -50,7 +52,6 @@ CREATE TABLE "job_requirements" (
     "education_level" education_level,
     "age_range" INT[],
     "work_experience" INT,
-    "job_type" VARCHAR(255),
     "job_vacancy_id" INT
 );
 
