@@ -1,9 +1,11 @@
 package com.example.jobcentrebackend.repository;
 
 import com.example.jobcentrebackend.entity.JobRequirementEntity;
+import com.example.jobcentrebackend.entity.UserEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface JobRequirementsRepository {
-    Optional<JobRequirementEntity> findByJobVacancyId(int id);
+public interface JobRequirementsRepository extends JpaRepository<JobRequirementEntity, Long> {
+    Optional<JobRequirementEntity> findByJobVacancyId(long id);
 }
