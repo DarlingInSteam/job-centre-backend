@@ -1,5 +1,6 @@
 package com.example.jobcentrebackend.entity.user;
 
+import com.example.jobcentrebackend.entity.auth.PasswordResetTokenEntity;
 import com.example.jobcentrebackend.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
@@ -62,4 +63,8 @@ public class UserEntity implements UserDetails {
     public boolean isEnabled() {
         return false;
     }
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private PasswordResetTokenEntity passwordResetToken;
 }
