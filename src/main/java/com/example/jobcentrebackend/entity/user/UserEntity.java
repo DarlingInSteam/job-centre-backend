@@ -1,4 +1,4 @@
-package com.example.jobcentrebackend.entity;
+package com.example.jobcentrebackend.entity.user;
 
 import com.example.jobcentrebackend.enums.Role;
 import jakarta.persistence.*;

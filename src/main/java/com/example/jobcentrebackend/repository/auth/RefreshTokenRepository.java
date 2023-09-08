@@ -1,6 +1,6 @@
-package com.example.jobcentrebackend.repository;
+package com.example.jobcentrebackend.repository.auth;
 
-import com.example.jobcentrebackend.entity.RefreshToken;
+import com.example.jobcentrebackend.entity.auth.RefreshToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

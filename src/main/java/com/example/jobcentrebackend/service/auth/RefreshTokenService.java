@@ -1,8 +1,8 @@
-package com.example.jobcentrebackend.service;
+package com.example.jobcentrebackend.service.auth;
 
-import com.example.jobcentrebackend.entity.RefreshToken;
-import com.example.jobcentrebackend.repository.RefreshTokenRepository;
-import com.example.jobcentrebackend.repository.UserRepository;
+import com.example.jobcentrebackend.entity.auth.RefreshToken;
+import com.example.jobcentrebackend.repository.auth.RefreshTokenRepository;
+import com.example.jobcentrebackend.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

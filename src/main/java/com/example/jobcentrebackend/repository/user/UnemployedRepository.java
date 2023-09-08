@@ -1,7 +1,6 @@
-package com.example.jobcentrebackend.repository;
+package com.example.jobcentrebackend.repository.user;
 
-import com.example.jobcentrebackend.entity.UnemployedEntity;
-import com.example.jobcentrebackend.entity.UserEntity;
+import com.example.jobcentrebackend.entity.user.UnemployedEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

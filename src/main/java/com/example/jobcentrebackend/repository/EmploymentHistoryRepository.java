@@ -1,7 +1,6 @@
 package com.example.jobcentrebackend.repository;
 
 import com.example.jobcentrebackend.entity.EmploymentHistoryEntity;
-import com.example.jobcentrebackend.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;

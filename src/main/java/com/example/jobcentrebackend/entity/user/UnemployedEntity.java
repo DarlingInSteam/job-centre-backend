@@ -1,4 +1,4 @@
-package com.example.jobcentrebackend.entity;
+package com.example.jobcentrebackend.entity.user;
 
 import com.example.jobcentrebackend.enums.EducationLevel;
 import jakarta.persistence.*;
@@ -6,9 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.catalina.User;
 
 import java.util.Date;
+
+import static jakarta.persistence.EnumType.STRING;
 
 @Entity
 @Data
@@ -41,6 +42,7 @@ public class UnemployedEntity {
     @Column(name = "photo")
     private String photo;
     @Column(name = "education_level")
+    @Enumerated(STRING)
     private EducationLevel educationLevel;
     @Column(name = "educational_institution")
     private String educationalInstitution;

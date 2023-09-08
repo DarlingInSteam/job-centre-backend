@@ -1,6 +1,6 @@
 package com.example.jobcentrebackend.config;
 
-import com.example.jobcentrebackend.service.JwtService;
+import com.example.jobcentrebackend.service.auth.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import static jakarta.persistence.EnumType.STRING;
+
 @Entity
 @Data
 @Builder
@@ -19,6 +21,7 @@ public class JobRequirementEntity {
     private long id;
 
     @Column(name = "education_level")
+    @Enumerated(STRING)
     private EducationLevel educationLevel;
 
     @Column(name = "age_range")

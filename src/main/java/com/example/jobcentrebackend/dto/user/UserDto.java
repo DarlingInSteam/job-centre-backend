@@ -1,6 +1,6 @@
-package com.example.jobcentrebackend.dto;
+package com.example.jobcentrebackend.dto.user;
 
-import com.example.jobcentrebackend.entity.UserEntity;
+import com.example.jobcentrebackend.entity.user.UserEntity;
 import com.example.jobcentrebackend.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package com.example.jobcentrebackend.service;
+package com.example.jobcentrebackend.service.auth;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

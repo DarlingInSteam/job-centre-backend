@@ -1,5 +1,6 @@
-package com.example.jobcentrebackend.entity;
+package com.example.jobcentrebackend.entity.user;
 
+import com.example.jobcentrebackend.entity.JobVacancyEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
