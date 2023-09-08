@@ -1,6 +1,6 @@
-package com.example.jobcentrebackend.dto.user;
+package com.example.jobcentrebackend.dto.unemployed;
 
-import com.example.jobcentrebackend.entity.user.UnemployedEntity;
+import com.example.jobcentrebackend.entity.unemployed.UnemployedEntity;
 import com.example.jobcentrebackend.enums.EducationLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,9 +1,11 @@
 package com.example.jobcentrebackend.service.user;
 
+import com.example.jobcentrebackend.dto.employer.EmployerDto;
 import com.example.jobcentrebackend.dto.user.UserDto;
+import com.example.jobcentrebackend.exception.employer.EmployerNotFoundException;
 import com.example.jobcentrebackend.exception.user.UserNotFoundException;
-import com.example.jobcentrebackend.repository.user.EmployerRepository;
-import com.example.jobcentrebackend.repository.user.UnemployedRepository;
+import com.example.jobcentrebackend.repository.employer.EmployerRepository;
+import com.example.jobcentrebackend.repository.unemployed.UnemployedRepository;
 import com.example.jobcentrebackend.repository.user.UserRepository;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,16 @@ public class UserService {
         return UserDto.toDto(userRepository
                 .findByPhone(phone)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"))
+        );
+    }
+
+    public EmployerDto getUserEmployer(@NotNull String phone) throws UserNotFoundException, EmployerNotFoundException {
+        var user = userRepository.findByPhone(phone)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+
+        return EmployerDto.toDto(employerRepository
+                .findByUser(user)
+                .orElseThrow(() -> new EmployerNotFoundException("Employer not found"))
         );
     }
 }

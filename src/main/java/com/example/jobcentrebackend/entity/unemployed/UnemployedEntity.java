@@ -1,5 +1,6 @@
-package com.example.jobcentrebackend.entity.user;
+package com.example.jobcentrebackend.entity.unemployed;
 
+import com.example.jobcentrebackend.entity.user.UserEntity;
 import com.example.jobcentrebackend.enums.EducationLevel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

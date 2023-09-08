@@ -81,6 +81,7 @@ public class AuthenticationService {
                 .builder()
                 .accessToken(jwtToken)
                 .token(refreshToken.getToken())
+                .phone(user.getPhone())
                 .build();
     }
 

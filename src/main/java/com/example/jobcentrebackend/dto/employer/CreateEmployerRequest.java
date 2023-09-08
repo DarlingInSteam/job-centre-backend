@@ -1,4 +1,4 @@
-package com.example.jobcentrebackend.dto.auth;
+package com.example.jobcentrebackend.dto.employer;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationResponse {
-    private String accessToken;
-
-    private String token;
+public class CreateEmployerRequest {
+    private String employerName;
+    private String address;
     private String phone;
 }
