@@ -6,6 +6,7 @@ import com.example.jobcentrebackend.dto.auth.RegisterRequest;
 import com.example.jobcentrebackend.entity.auth.PasswordResetTokenEntity;
 import com.example.jobcentrebackend.entity.auth.RefreshToken;
 import com.example.jobcentrebackend.entity.user.UserEntity;
+import com.example.jobcentrebackend.exception.auth.PasswordResetTokenIsExpiredException;
 import com.example.jobcentrebackend.exception.auth.PasswordResetTokenNotFoundException;
 import com.example.jobcentrebackend.exception.auth.UsernameIsOccupiedException;
 import com.example.jobcentrebackend.exception.user.UserNotFoundException;
@@ -19,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -48,6 +50,7 @@ public class AuthenticationService {
 
         var user = UserEntity.builder()
                 .phone(request.getPhone())
+                .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())
                 .build();
@@ -61,18 +64,19 @@ public class AuthenticationService {
                 .builder()
                 .accessToken(jwtToken)
                 .token(refreshToken.getToken())
+                .username(user.getUsername())
                 .build();
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) throws UserNotFoundException {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getPhone(),
+                        request.getUsername(),
                         request.getPassword()
                 )
         );
 
-        var user = repository.findByPhone(request.getPhone()).orElseThrow(() -> new UserNotFoundException("User not found"));
+        var user = repository.findByUsername(request.getUsername()).orElseThrow(() -> new UserNotFoundException("User not found"));
 
         String jwtToken = jwtService.generateToken(user);
         RefreshToken refreshToken = refreshTokenService.createRefreshToken(user.getUsername());
@@ -81,7 +85,7 @@ public class AuthenticationService {
                 .builder()
                 .accessToken(jwtToken)
                 .token(refreshToken.getToken())
-                .phone(user.getPhone())
+                .username(user.getUsername())
                 .build();
     }
 
@@ -98,9 +102,32 @@ public class AuthenticationService {
         return "Password reset succeeded";
     }
 
+    private PasswordResetTokenEntity generatePasswordResetToken(UserEntity user) {
+        return PasswordResetTokenEntity
+                .builder()
+                .token(UUID.randomUUID().toString())
+                .user(user)
+                .expiryDate(new Date(System.currentTimeMillis() + 1000 * 60 * 5))
+                .build();
+    }
 
     private void validateRegisterRequest(RegisterRequest request) throws UsernameIsOccupiedException {
-        if (repository.findByPhone(request.getPhone()).isPresent())
+        if (repository.findByUsername(request.getUsername()).isPresent())
             throw new UsernameIsOccupiedException("Account with this username is already registered");
+    }
+
+    public String validatePasswordResetToken(String token) throws PasswordResetTokenNotFoundException, PasswordResetTokenIsExpiredException {
+        PasswordResetTokenEntity tokenEntity = passwordResetTokenRepository.findByToken(token).orElseThrow(() -> new PasswordResetTokenNotFoundException("Password reset token not found"));;
+
+        ValidatePasswordResetToken(tokenEntity);
+
+        return "Token validated successfully";
+    }
+
+    private void ValidatePasswordResetToken(PasswordResetTokenEntity token) throws PasswordResetTokenIsExpiredException {
+        if (token.isExpired()) {
+            passwordResetTokenRepository.delete(token);
+            throw new PasswordResetTokenIsExpiredException("Password reset token is expired!");
+        }
     }
 }

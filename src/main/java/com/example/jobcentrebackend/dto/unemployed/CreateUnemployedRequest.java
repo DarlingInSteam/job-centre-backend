@@ -25,5 +25,5 @@ public class CreateUnemployedRequest {
     private String educationDocumentData;
     private String speciality;
     private int workExperience;
-    private String phone;
+    private String username;
 }

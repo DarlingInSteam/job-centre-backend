@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class CreateEmployerRequest {
     private String employerName;
     private String address;
-    private String phone;
+    private String username;
 }

@@ -16,15 +16,30 @@ CREATE TYPE "role" AS ENUM (
 );
 
 CREATE TABLE "users" (
-    "id" SERIAL PRIMARY KEY,
+    "id" BIGSERIAL PRIMARY KEY,
+    "username" varchar(20),
     "phone" VARCHAR(20),
     "password" VARCHAR(100),
     "role" role
 );
 
+CREATE TABLE "password_reset_tokens" (
+    "id" BIGSERIAL PRIMARY KEY,
+    "user_id" BIGINT,
+    "token"  varchar(100),
+    "expiry_date" TIMESTAMP WITHOUT TIME ZONE
+);
+
+CREATE TABLE "refresh_tokens" (
+    "id" BIGSERIAL PRIMARY KEY,
+    "user_id" BIGINT,
+    "token" varchar UNIQUE,
+    "expiry_date" TIMESTAMP WITHOUT TIME ZONE
+);
+
 CREATE TABLE "unemployed" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INT,
+    "user_id" BIGINT,
     "full_name" VARCHAR(255) NOT NULL,
     "age" INT,
     "passport_number" VARCHAR(20) UNIQUE NOT NULL,
@@ -42,7 +57,7 @@ CREATE TABLE "unemployed" (
 
 CREATE TABLE "employers" (
      "id" SERIAL PRIMARY KEY,
-     "user_id" INT,
+     "user_id" BIGINT,
      "employer_name" VARCHAR(255) NOT NULL,
      "address" TEXT
 );
@@ -75,6 +90,8 @@ CREATE TABLE "employment_history" (
     "termination_reason" VARCHAR(255),
     "archived" BOOLEAN DEFAULT FALSE
 );
+
+ALTER TABLE "refresh_tokens" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
 ALTER TABLE "job_requirements" ADD FOREIGN KEY ("job_vacancy_id") REFERENCES "job_vacancies" ("id");
 

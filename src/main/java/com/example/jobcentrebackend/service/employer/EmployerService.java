@@ -44,7 +44,7 @@ public class EmployerService {
                 .builder()
                 .employerName(request.getEmployerName())
                 .address(request.getAddress())
-                .user(userRepository.findByPhone(request.getPhone())
+                .user(userRepository.findByUsername(request.getUsername())
                         .orElseThrow(() -> new UserNotFoundException("User not found"))
                 )
                 .build()

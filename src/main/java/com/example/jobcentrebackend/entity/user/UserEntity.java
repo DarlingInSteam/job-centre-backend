@@ -6,9 +6,11 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 
 import static jakarta.persistence.EnumType.STRING;
 
@@ -27,6 +29,10 @@ public class UserEntity implements UserDetails {
     @Size(max = 11, message = "{validation.name.size.too_long}")
     private String phone;
 
+    @Size(min = 3, message = "{validation.name.size.too_short}")
+    @Size(max = 20, message = "{validation.name.size.too_long}")
+    private String username;
+
     @Size(min = 8, message = "{validation.name.size.too_short}")
     @Size(max = 100, message = "{validation.name.size.too_long}")
     private String password;
@@ -34,37 +40,32 @@ public class UserEntity implements UserDetails {
     @Enumerated(STRING)
     private Role role;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private PasswordResetTokenEntity passwordResetToken;
 
     @Override
-    public String getUsername() {
-        return null;
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private PasswordResetTokenEntity passwordResetToken;
 }

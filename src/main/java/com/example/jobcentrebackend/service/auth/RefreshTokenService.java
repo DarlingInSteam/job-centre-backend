@@ -18,10 +18,10 @@ public class RefreshTokenService {
     @Autowired
     private UserRepository userRepository;
 
-    public RefreshToken createRefreshToken(String phone) {
+    public RefreshToken createRefreshToken(String username) {
         RefreshToken token = RefreshToken
                 .builder()
-                .user(userRepository.findByPhone(phone).get())
+                .user(userRepository.findByUsername(username).get())
                 .token(UUID.randomUUID().toString())
                 .expiryDate(Instant.now().plusMillis(1000 * 60 * 60)) // 1 hour
                 .build();

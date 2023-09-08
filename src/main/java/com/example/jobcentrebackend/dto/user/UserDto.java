@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserDto {
     private long id;
+    private String username;
     private String phone;
     private Role role;
 
@@ -22,6 +23,7 @@ public class UserDto {
                 .id(entity.getId())
                 .phone(entity.getPhone())
                 .role(entity.getRole())
+                .username(entity.getUsername())
                 .build();
     }
 }

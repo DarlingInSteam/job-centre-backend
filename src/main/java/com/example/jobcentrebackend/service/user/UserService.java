@@ -1,8 +1,10 @@
 package com.example.jobcentrebackend.service.user;
 
 import com.example.jobcentrebackend.dto.employer.EmployerDto;
+import com.example.jobcentrebackend.dto.unemployed.UnemployedDto;
 import com.example.jobcentrebackend.dto.user.UserDto;
 import com.example.jobcentrebackend.exception.employer.EmployerNotFoundException;
+import com.example.jobcentrebackend.exception.unemployed.UnemployedNotFoundException;
 import com.example.jobcentrebackend.exception.user.UserNotFoundException;
 import com.example.jobcentrebackend.repository.employer.EmployerRepository;
 import com.example.jobcentrebackend.repository.unemployed.UnemployedRepository;
@@ -31,20 +33,37 @@ public class UserService {
         );
     }
 
-    public UserDto getUserPhone(@NotNull String phone) throws UserNotFoundException {
+    public UserDto getUserUsername(@NotNull String username) throws UserNotFoundException {
         return UserDto.toDto(userRepository
-                .findByPhone(phone)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"))
+                .findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException("User not found"))
         );
     }
 
-    public EmployerDto getUserEmployer(@NotNull String phone) throws UserNotFoundException, EmployerNotFoundException {
-        var user = userRepository.findByPhone(phone)
+    public UserDto getUserPhone(@NotNull String phone) throws UserNotFoundException {
+        return UserDto.toDto(userRepository
+                .findByPhone(phone)
+                .orElseThrow(() -> new UserNotFoundException("User not found"))
+        );
+    }
+
+    public EmployerDto getUserEmployer(@NotNull String username) throws UserNotFoundException, EmployerNotFoundException {
+        var user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
 
         return EmployerDto.toDto(employerRepository
                 .findByUser(user)
                 .orElseThrow(() -> new EmployerNotFoundException("Employer not found"))
+        );
+    }
+
+    public UnemployedDto getUserUnemployed(@NotNull String username) throws UserNotFoundException, UnemployedNotFoundException {
+        var user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+
+        return UnemployedDto.toDto(unemployedRepository
+                .findByUser(user)
+                .orElseThrow(() -> new UnemployedNotFoundException("Unemployed not found exception"))
         );
     }
 }

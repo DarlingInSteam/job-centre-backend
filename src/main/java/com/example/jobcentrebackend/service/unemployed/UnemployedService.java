@@ -50,7 +50,7 @@ public class UnemployedService {
                 .specialty(request.getSpeciality())
                 .workExperience(request.getWorkExperience())
                 .registrationDate(new Date(System.currentTimeMillis()))
-                .user(userRepository.findByPhone(request.getPhone())
+                .user(userRepository.findByUsername(request.getUsername())
                         .orElseThrow(() -> new UserNotFoundException("User not found"))
                 )
                 .build()
