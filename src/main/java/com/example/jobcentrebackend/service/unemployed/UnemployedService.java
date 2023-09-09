@@ -21,9 +21,9 @@ public class UnemployedService {
     @Autowired
     private UserRepository userRepository;
 
-    public UnemployedDto getUnemployedUserId(long id) throws UserNotFoundException, UnemployedNotFoundException {
+    public UnemployedDto getUnemployedUsername(String username) throws UserNotFoundException, UnemployedNotFoundException {
         return UnemployedDto.toDto(unemployedRepository
-                .findByUser(userRepository.findById(id)
+                .findByUser(userRepository.findByUsername(username)
                         .orElseThrow(() -> new UserNotFoundException("User not found"))
                 )
                 .orElseThrow(() -> new UnemployedNotFoundException("Unemployed noy found"))

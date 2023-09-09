@@ -20,8 +20,8 @@ public class UserController {
         }
     }
 
-    @PostMapping("/{username}")
-    public ResponseEntity getUserEmployedByUsername(@PathVariable String username) {
+    @GetMapping("/user_employed")
+    public ResponseEntity getUserEmployedByUsername(@RequestParam String username) {
         try {
             return ResponseEntity.ok(userService.getUserEmployer(username));
         } catch (Exception e) {
@@ -29,8 +29,8 @@ public class UserController {
         }
     }
 
-    @PostMapping("/{username}")
-    public ResponseEntity getUserUnemployedByUsername(@PathVariable String username) {
+    @GetMapping("/user_unemployed")
+    public ResponseEntity getUserUnemployedByUsername(@RequestParam String username) {
         try {
             return ResponseEntity.ok(userService.getUserUnemployed(username));
         } catch (Exception e) {

@@ -18,7 +18,7 @@ public class UnemployedDto {
     private String fullName;
     private int age;
     private String passportNumber;
-    private Date passportIssueDate;
+    private String passportIssueDate;
     private String passportIssueBy;
     private String address;
     private String photo;

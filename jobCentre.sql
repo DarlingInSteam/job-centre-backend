@@ -43,7 +43,7 @@ CREATE TABLE "unemployed" (
     "full_name" VARCHAR(255) NOT NULL,
     "age" INT,
     "passport_number" VARCHAR(20) UNIQUE NOT NULL,
-    "passport_issue_date" TIMESTAMP WITHOUT TIME ZONE,
+    "passport_issue_date" VARCHAR(255),
     "passport_issued_by" VARCHAR(255),
     "address" TEXT,
     "photo" TEXT,

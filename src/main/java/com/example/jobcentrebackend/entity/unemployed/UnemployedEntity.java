@@ -35,7 +35,7 @@ public class UnemployedEntity {
     private String passportNumber;
 
     @Column(name = "passport_issue_date")
-    private Date passportIssueDate;
+    private String passportIssueDate;
     @Column(name = "passport_issued_by")
     private String passportIssuedBy;
     @Column(name = "address")
