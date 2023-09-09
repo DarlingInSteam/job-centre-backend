@@ -1,18 +1,15 @@
-package com.example.jobcentrebackend.entity.empoyer;
+package com.example.jobcentrebackend.entity.employer;
 
 import com.example.jobcentrebackend.entity.vacancy.JobVacancyEntity;
 import com.example.jobcentrebackend.entity.user.UserEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.util.List;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,9 +28,6 @@ public class EmployerEntity {
 
     @Column(name = "address")
     private String address;
-
-    @OneToMany(mappedBy = "employer")
-    private List<JobVacancyEntity> jobVacancies;
 
     @OneToMany
     @JoinTable(

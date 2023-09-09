@@ -71,15 +71,13 @@ CREATE TABLE "job_requirements" (
     "id" SERIAL PRIMARY KEY,
     "education_level" education_level,
     "age_range" INT[],
-    "work_experience" INT,
-    "job_vacancy_id" INT
+    "work_experience" INT
 );
 
 CREATE TABLE "job_vacancies" (
      "id" SERIAL PRIMARY KEY,
      "job_type" VARCHAR(255),
      "job_title" VARCHAR(255) NOT NULL,
-     "employer_id" INT,
      "salary" INT,
      "requirements_id" INT,
      "archived" BOOLEAN DEFAULT FALSE
@@ -97,10 +95,6 @@ CREATE TABLE "employment_history" (
 );
 
 ALTER TABLE "refresh_tokens" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
-
-ALTER TABLE "job_requirements" ADD FOREIGN KEY ("job_vacancy_id") REFERENCES "job_vacancies" ("id");
-
-ALTER TABLE "job_vacancies" ADD FOREIGN KEY ("employer_id") REFERENCES "employers" ("id");
 
 ALTER TABLE "job_vacancies" ADD FOREIGN KEY ("requirements_id") REFERENCES "job_requirements" ("id");
 

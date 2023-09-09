@@ -29,8 +29,4 @@ public class JobRequirementEntity {
 
     @Column(name = "work_experience")
     private int workExperience;
-
-    @OneToOne
-    @JoinColumn(name = "job_vacancy_id")
-    private JobVacancyEntity jobVacancy;
 }

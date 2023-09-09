@@ -1,6 +1,6 @@
 package com.example.jobcentrebackend.entity.vacancy;
 
-import com.example.jobcentrebackend.entity.empoyer.EmployerEntity;
+import com.example.jobcentrebackend.entity.employer.EmployerEntity;
 import com.example.jobcentrebackend.entity.unemployed.UnemployedEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

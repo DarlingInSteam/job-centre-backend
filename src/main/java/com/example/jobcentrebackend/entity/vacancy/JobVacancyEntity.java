@@ -1,6 +1,6 @@
 package com.example.jobcentrebackend.entity.vacancy;
 
-import com.example.jobcentrebackend.entity.empoyer.EmployerEntity;
+import com.example.jobcentrebackend.entity.employer.EmployerEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,15 +24,14 @@ public class JobVacancyEntity {
     @Column(name = "job_title")
     private String jobTitle;
 
-    @ManyToOne
-    @JoinColumn(name = "employer_id")
-    private EmployerEntity employer;
-
     @Column(name = "salary")
     private int salary;
 
     @Column(name = "archived")
     private boolean archived;
+
+    @Column(name = "requirements_id")
+    private long requirementsId;
 
     @ManyToOne
     private EmployerEntity employerEntity;

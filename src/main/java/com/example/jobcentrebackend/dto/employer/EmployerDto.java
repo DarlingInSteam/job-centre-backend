@@ -1,7 +1,7 @@
 package com.example.jobcentrebackend.dto.employer;
 
 import com.example.jobcentrebackend.dto.vacancy.JobVacanciesDto;
-import com.example.jobcentrebackend.entity.empoyer.EmployerEntity;
+import com.example.jobcentrebackend.entity.employer.EmployerEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,7 +25,7 @@ public class EmployerDto {
                 .id(entity.getId())
                 .employerName(entity.getEmployerName())
                 .address(entity.getAddress())
-                .vacancies(entity.getJobVacancies()
+                .vacancies(entity.getJobVacancyEntity()
                         .stream()
                         .map(JobVacanciesDto::toDto)
                         .toList()

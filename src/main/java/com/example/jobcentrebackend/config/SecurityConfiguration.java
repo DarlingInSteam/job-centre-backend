@@ -28,7 +28,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/auth/**").permitAll()
                 )
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/user/**", "/unemployed/**", "/employer/**").authenticated()
+                        .requestMatchers("/user/**", "/unemployed/**", "/employer/**", "/job_vacancy/**").authenticated()
                 )
                 .sessionManagement(authorize -> authorize
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
