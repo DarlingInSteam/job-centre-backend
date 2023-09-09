@@ -1,4 +1,4 @@
-package com.example.jobcentrebackend.repository;
+package com.example.jobcentrebackend.repository.vacancy;
 
 import com.example.jobcentrebackend.entity.vacancy.EmploymentHistoryEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

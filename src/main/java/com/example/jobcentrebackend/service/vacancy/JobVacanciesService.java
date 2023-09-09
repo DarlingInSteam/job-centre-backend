@@ -11,8 +11,8 @@ import com.example.jobcentrebackend.exception.employer.EmployerNotFoundException
 import com.example.jobcentrebackend.exception.user.UserNotFoundException;
 import com.example.jobcentrebackend.exception.vacancy.JobVacacyNotFoundException;
 import com.example.jobcentrebackend.exception.vacancy.VacancyAlreadyExists;
-import com.example.jobcentrebackend.repository.JobRequirementsRepository;
-import com.example.jobcentrebackend.repository.JobVacanciesRepository;
+import com.example.jobcentrebackend.repository.vacancy.JobRequirementsRepository;
+import com.example.jobcentrebackend.repository.vacancy.JobVacanciesRepository;
 import com.example.jobcentrebackend.repository.employer.EmployerRepository;
 import com.example.jobcentrebackend.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

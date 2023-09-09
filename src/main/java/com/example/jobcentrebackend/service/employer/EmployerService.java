@@ -11,7 +11,7 @@ import com.example.jobcentrebackend.exception.employer.EmployerAlreadyExists;
 import com.example.jobcentrebackend.exception.employer.EmployerNotFoundException;
 import com.example.jobcentrebackend.exception.user.UserHasInappropriateRole;
 import com.example.jobcentrebackend.exception.user.UserNotFoundException;
-import com.example.jobcentrebackend.repository.JobRequirementsRepository;
+import com.example.jobcentrebackend.repository.vacancy.JobRequirementsRepository;
 import com.example.jobcentrebackend.repository.employer.EmployerRepository;
 import com.example.jobcentrebackend.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
