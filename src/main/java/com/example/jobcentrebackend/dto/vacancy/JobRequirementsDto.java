@@ -1,6 +1,6 @@
-package com.example.jobcentrebackend.dto;
+package com.example.jobcentrebackend.dto.vacancy;
 
-import com.example.jobcentrebackend.entity.JobRequirementEntity;
+import com.example.jobcentrebackend.entity.vacancy.JobRequirementEntity;
 import com.example.jobcentrebackend.enums.EducationLevel;
 import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;

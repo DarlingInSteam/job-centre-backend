@@ -1,4 +1,4 @@
-package com.example.jobcentrebackend.entity;
+package com.example.jobcentrebackend.entity.vacancy;
 
 import com.example.jobcentrebackend.entity.empoyer.EmployerEntity;
 import com.example.jobcentrebackend.entity.unemployed.UnemployedEntity;

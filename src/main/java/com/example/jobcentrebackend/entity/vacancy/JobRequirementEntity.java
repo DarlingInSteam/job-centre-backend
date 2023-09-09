@@ -1,4 +1,4 @@
-package com.example.jobcentrebackend.entity;
+package com.example.jobcentrebackend.entity.vacancy;
 
 import com.example.jobcentrebackend.enums.EducationLevel;
 import jakarta.persistence.*;

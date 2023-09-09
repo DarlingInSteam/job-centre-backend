@@ -62,6 +62,11 @@ CREATE TABLE "employers" (
      "address" TEXT
 );
 
+CREATE TABLE "employer_job_vacancies" (
+    "employer_id" BIGINT,
+    "vacancy_id" BIGINT
+);
+
 CREATE TABLE "job_requirements" (
     "id" SERIAL PRIMARY KEY,
     "education_level" education_level,

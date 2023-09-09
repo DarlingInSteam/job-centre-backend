@@ -1,6 +1,6 @@
-package com.example.jobcentrebackend.dto;
+package com.example.jobcentrebackend.dto.vacancy;
 
-import com.example.jobcentrebackend.entity.EmploymentHistoryEntity;
+import com.example.jobcentrebackend.entity.vacancy.EmploymentHistoryEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

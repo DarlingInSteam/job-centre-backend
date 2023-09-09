@@ -1,4 +1,4 @@
-package com.example.jobcentrebackend.entity;
+package com.example.jobcentrebackend.entity.vacancy;
 
 import com.example.jobcentrebackend.entity.empoyer.EmployerEntity;
 import jakarta.persistence.*;
@@ -33,4 +33,7 @@ public class JobVacancyEntity {
 
     @Column(name = "archived")
     private boolean archived;
+
+    @ManyToOne
+    private EmployerEntity employerEntity;
 }
