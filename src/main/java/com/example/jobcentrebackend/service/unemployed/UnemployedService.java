@@ -3,8 +3,10 @@ package com.example.jobcentrebackend.service.unemployed;
 import com.example.jobcentrebackend.dto.unemployed.CreateUnemployedRequest;
 import com.example.jobcentrebackend.dto.unemployed.UnemployedDto;
 import com.example.jobcentrebackend.entity.unemployed.UnemployedEntity;
+import com.example.jobcentrebackend.enums.Role;
 import com.example.jobcentrebackend.exception.unemployed.UnemployedAlreadyExists;
 import com.example.jobcentrebackend.exception.unemployed.UnemployedNotFoundException;
+import com.example.jobcentrebackend.exception.user.UserHasInappropriateRole;
 import com.example.jobcentrebackend.exception.user.UserNotFoundException;
 import com.example.jobcentrebackend.repository.unemployed.UnemployedRepository;
 import com.example.jobcentrebackend.repository.user.UserRepository;
@@ -30,9 +32,13 @@ public class UnemployedService {
         );
     }
 
-    public String createUnemployed(CreateUnemployedRequest request) throws UnemployedAlreadyExists, UserNotFoundException {
+    public String createUnemployed(CreateUnemployedRequest request) throws UnemployedAlreadyExists, UserNotFoundException, UserHasInappropriateRole {
         if(unemployedRepository.findByPassportNumber(request.getPassportNumber()).isPresent()) {
             throw new UnemployedAlreadyExists("Unemployed already exists");
+        }
+
+        if(userRepository.findByUsername(request.getUsername()).get().getRole() != Role.UNEMPLOYED) {
+            throw new UserHasInappropriateRole("The user has an inappropriate role");
         }
 
         unemployedRepository.save(UnemployedEntity
