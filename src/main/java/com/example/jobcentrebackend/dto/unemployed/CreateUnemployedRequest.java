@@ -17,6 +17,7 @@ public class CreateUnemployedRequest {
     private int age;
     private String passportNumber;
     private String passportIssueDate;
+    private String dateOfBirth;
     private String passportIssueBy;
     private String address;
     private String photo;

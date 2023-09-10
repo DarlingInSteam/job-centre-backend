@@ -2,12 +2,14 @@ package com.example.jobcentrebackend.service.unemployed;
 
 import com.example.jobcentrebackend.dto.unemployed.CreateUnemployedRequest;
 import com.example.jobcentrebackend.dto.unemployed.UnemployedDto;
+import com.example.jobcentrebackend.entity.passport.PassportEntity;
 import com.example.jobcentrebackend.entity.unemployed.UnemployedEntity;
 import com.example.jobcentrebackend.enums.Role;
 import com.example.jobcentrebackend.exception.unemployed.UnemployedAlreadyExists;
 import com.example.jobcentrebackend.exception.unemployed.UnemployedNotFoundException;
 import com.example.jobcentrebackend.exception.user.UserHasInappropriateRole;
 import com.example.jobcentrebackend.exception.user.UserNotFoundException;
+import com.example.jobcentrebackend.repository.passport.PassportRepository;
 import com.example.jobcentrebackend.repository.unemployed.UnemployedRepository;
 import com.example.jobcentrebackend.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class UnemployedService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PassportRepository passportRepository;
+
     public UnemployedDto getUnemployedUsername(String username) throws UserNotFoundException, UnemployedNotFoundException {
         return UnemployedDto.toDto(unemployedRepository
                 .findByUser(userRepository.findByUsername(username)
@@ -33,7 +38,8 @@ public class UnemployedService {
     }
 
     public String createUnemployed(CreateUnemployedRequest request) throws UnemployedAlreadyExists, UserNotFoundException, UserHasInappropriateRole {
-        if(unemployedRepository.findByPassportNumber(request.getPassportNumber()).isPresent()) {
+        if(unemployedRepository.findByUser(userRepository.findByUsername(request.getUsername())
+                .orElseThrow(() -> new UserNotFoundException("User not found"))).isPresent()) {
             throw new UnemployedAlreadyExists("Unemployed already exists");
         }
 
@@ -41,18 +47,27 @@ public class UnemployedService {
             throw new UserHasInappropriateRole("The user has an inappropriate role");
         }
 
+        var a = passportRepository.save(PassportEntity
+                .builder()
+                .dateOfBirth(request.getDateOfBirth())
+                .passportNumber(request.getPassportNumber())
+                .passportIssueDate(request.getPassportIssueDate())
+                .passportIssuedBy(request.getPassportIssueBy())
+                .photo(request.getPhoto())
+                .address(request.getAddress())
+                .build()
+        );
+
+        var passportId = a.getId();
+
         unemployedRepository.save(UnemployedEntity
                 .builder()
                 .age(request.getAge())
+                .passportId(passportId)
                 .fullName(request.getFullName())
-                .photo(request.getPhoto())
                 .educationLevel(request.getEducationLevel())
                 .educationalInstitution(request.getEducationalInstitution())
-                .passportNumber(request.getPassportNumber())
-                .address(request.getAddress())
                 .educationDocumentData(request.getEducationDocumentData())
-                .passportIssueDate(request.getPassportIssueDate())
-                .passportIssuedBy(request.getPassportIssueBy())
                 .specialty(request.getSpeciality())
                 .workExperience(request.getWorkExperience())
                 .registrationDate(new Date(System.currentTimeMillis()))

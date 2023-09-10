@@ -37,16 +37,22 @@ CREATE TABLE "refresh_tokens" (
     "expiry_date" TIMESTAMP WITHOUT TIME ZONE
 );
 
+CREATE TABLE "passports" (
+    "id" SERIAL PRIMARY KEY,
+    "passport_number" VARCHAR(20) UNIQUE NOT NULL,
+    "passport_issue_date" VARCHAR(255),
+    "date_of_birth" VARCHAR(255),
+    "passport_issued_by" VARCHAR(255),
+    "address" TEXT,
+    "photo" TEXT
+);
+
 CREATE TABLE "unemployed" (
     "id" SERIAL PRIMARY KEY,
+    "passport_id" BIGINT,
     "user_id" BIGINT,
     "full_name" VARCHAR(255) NOT NULL,
     "age" INT,
-    "passport_number" VARCHAR(20) UNIQUE NOT NULL,
-    "passport_issue_date" VARCHAR(255),
-    "passport_issued_by" VARCHAR(255),
-    "address" TEXT,
-    "photo" TEXT,
     "education_level" education_level,
     "educational_institution" VARCHAR(255),
     "education_document_data" VARCHAR(255),
@@ -102,6 +108,8 @@ CREATE TABLE "employment_history" (
 ALTER TABLE "refresh_tokens" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
 ALTER TABLE "job_vacancies" ADD FOREIGN KEY ("requirements_id") REFERENCES "job_requirements" ("id");
+
+ALTER TABLE "unemployed" ADD FOREIGN KEY ("passport_id") REFERENCES "passports" ("id");
 
 ALTER TABLE "employment_history" ADD FOREIGN KEY ("unemployed_id") REFERENCES "unemployed" ("id");
 

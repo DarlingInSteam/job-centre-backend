@@ -15,13 +15,9 @@ import java.util.Date;
 @NoArgsConstructor
 public class UnemployedDto {
     private long id;
+    private long passportId;
     private String fullName;
     private int age;
-    private String passportNumber;
-    private String passportIssueDate;
-    private String passportIssueBy;
-    private String address;
-    private String photo;
     private EducationLevel educationLevel;
     private String educationalInstitution;
     private String educationDocumentData;
@@ -33,13 +29,9 @@ public class UnemployedDto {
         return UnemployedDto
                 .builder()
                 .id(entity.getId())
+                .passportId(entity.getPassportId())
                 .fullName(entity.getFullName())
                 .age(entity.getAge())
-                .passportNumber(entity.getPassportNumber())
-                .passportIssueDate(entity.getPassportIssueDate())
-                .passportIssueBy(entity.getPassportIssuedBy())
-                .address(entity.getAddress())
-                .photo(entity.getPhoto())
                 .educationLevel(entity.getEducationLevel())
                 .educationalInstitution(entity.getEducationalInstitution())
                 .educationDocumentData(entity.getEducationDocumentData())

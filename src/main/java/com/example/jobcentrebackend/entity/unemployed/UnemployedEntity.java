@@ -29,32 +29,31 @@ public class UnemployedEntity {
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
+    @Column(name = "passport_id")
+    private long passportId;
+
     @Column(name = "full_name")
     private String fullName;
+
     @Column(name = "age")
     private int age;
-    @Column(name = "passport_number")
-    private String passportNumber;
 
-    @Column(name = "passport_issue_date")
-    private String passportIssueDate;
-    @Column(name = "passport_issued_by")
-    private String passportIssuedBy;
-    @Column(name = "address")
-    private String address;
-    @Column(name = "photo")
-    private String photo;
     @Column(name = "education_level")
     @Enumerated(STRING)
     private EducationLevel educationLevel;
+
     @Column(name = "educational_institution")
     private String educationalInstitution;
+
     @Column(name = "education_document_data")
     private String educationDocumentData;
+
     @Column(name = "specialty")
     private String specialty;
+
     @Column(name = "work_experience")
     private int workExperience;
+
     @Column(name = "registration_date")
     private Date registrationDate;
 
