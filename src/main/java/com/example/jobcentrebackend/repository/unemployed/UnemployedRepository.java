@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface UnemployedRepository extends JpaRepository<UnemployedEntity, Long> {
     Optional<UnemployedEntity> findByPassportNumber(String number);
     Optional<UnemployedEntity> findByUser(UserEntity user);
+    Optional<UnemployedEntity> findById(long id);
+
 }

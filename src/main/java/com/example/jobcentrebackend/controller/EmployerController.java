@@ -40,4 +40,13 @@ public class EmployerController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @GetMapping("/get_applies_vacancies")
+    public ResponseEntity getAppliesVacancies(@RequestParam String username) {
+        try {
+            return ResponseEntity.ok(service.getAppliesForVacancies(username));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
