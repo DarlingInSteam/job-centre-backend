@@ -5,18 +5,23 @@ import com.example.jobcentrebackend.dto.vacancy.GetJobVacancyResponse;
 import com.example.jobcentrebackend.dto.vacancy.JobRequirementsDto;
 import com.example.jobcentrebackend.dto.vacancy.JobVacanciesDto;
 import com.example.jobcentrebackend.entity.employer.EmployerEntity;
+import com.example.jobcentrebackend.entity.unemployed.UnemployedEntity;
 import com.example.jobcentrebackend.entity.vacancy.JobRequirementEntity;
 import com.example.jobcentrebackend.entity.vacancy.JobVacancyEntity;
 import com.example.jobcentrebackend.exception.employer.EmployerNotFoundException;
+import com.example.jobcentrebackend.exception.unemployed.UnemployedNotFoundException;
 import com.example.jobcentrebackend.exception.user.UserNotFoundException;
 import com.example.jobcentrebackend.exception.vacancy.JobVacacyNotFoundException;
 import com.example.jobcentrebackend.exception.vacancy.VacancyAlreadyExists;
+import com.example.jobcentrebackend.repository.unemployed.UnemployedRepository;
 import com.example.jobcentrebackend.repository.vacancy.JobRequirementsRepository;
 import com.example.jobcentrebackend.repository.vacancy.JobVacanciesRepository;
 import com.example.jobcentrebackend.repository.employer.EmployerRepository;
 import com.example.jobcentrebackend.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service
 public class JobVacanciesService {
@@ -31,6 +36,9 @@ public class JobVacanciesService {
 
     @Autowired
     private JobRequirementsRepository jobRequirementsRepository;
+
+    @Autowired
+    private UnemployedRepository unemployedRepository;
 
     public String createVacancy(CreateJobVacancyRequest request) throws VacancyAlreadyExists, UserNotFoundException, EmployerNotFoundException, JobVacacyNotFoundException {
         if (repository.findByJobTitle(request.getJobTitle()).isPresent()) {
@@ -80,5 +88,24 @@ public class JobVacanciesService {
                 .jobRequirement(JobRequirementsDto.toDto(jobRequirementEntity))
                 .build();
 
+    }
+
+    public boolean ApplyVacancyUnemployed(long vacancyId, String username) throws JobVacacyNotFoundException, UserNotFoundException, UnemployedNotFoundException {
+        JobVacancyEntity jobVacancyEntity = repository.findById(vacancyId)
+                .orElseThrow(() -> new JobVacacyNotFoundException("Job vacancy not found"));
+        UnemployedEntity unemployedEntity = unemployedRepository
+                .findByUser(userRepository.findByUsername(username)
+                        .orElseThrow(() -> new UserNotFoundException("User not found")))
+                        .orElseThrow(() -> new UnemployedNotFoundException("Unemployed not found exception"));
+
+        Set<UnemployedEntity> unemployedEntities = jobVacancyEntity.getUnemployedEntities();
+
+        unemployedEntities.add(unemployedEntity);
+
+        jobVacancyEntity.setUnemployedEntities(unemployedEntities);
+
+        repository.save(jobVacancyEntity);
+
+        return true;
     }
 }

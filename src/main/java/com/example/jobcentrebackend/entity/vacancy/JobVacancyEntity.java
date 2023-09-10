@@ -1,14 +1,15 @@
 package com.example.jobcentrebackend.entity.vacancy;
 
 import com.example.jobcentrebackend.entity.employer.EmployerEntity;
+import com.example.jobcentrebackend.entity.unemployed.UnemployedEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -35,4 +36,12 @@ public class JobVacancyEntity {
 
     @ManyToOne
     private EmployerEntity employerEntity;
+
+    @ManyToMany
+    @JoinTable(
+            name = "vacancies_apply_unemployed",
+            joinColumns = @JoinColumn(name = "vacancy_id"),
+            inverseJoinColumns = @JoinColumn(name = "unemployed_id")
+    )
+    private Set<UnemployedEntity>  unemployedEntities;
 }

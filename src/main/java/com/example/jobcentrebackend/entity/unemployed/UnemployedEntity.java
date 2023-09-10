@@ -1,6 +1,7 @@
 package com.example.jobcentrebackend.entity.unemployed;
 
 import com.example.jobcentrebackend.entity.user.UserEntity;
+import com.example.jobcentrebackend.entity.vacancy.JobVacancyEntity;
 import com.example.jobcentrebackend.enums.EducationLevel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.Set;
 
 import static jakarta.persistence.EnumType.STRING;
 
@@ -55,4 +57,7 @@ public class UnemployedEntity {
     private int workExperience;
     @Column(name = "registration_date")
     private Date registrationDate;
+
+    @ManyToMany
+    private Set<JobVacancyEntity> jobVacancyEntities;
 }

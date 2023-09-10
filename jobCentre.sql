@@ -83,6 +83,11 @@ CREATE TABLE "job_vacancies" (
      "archived" BOOLEAN DEFAULT FALSE
 );
 
+CREATE TABLE "vacancies_apply_unemployed" (
+    "vacancy_id" BIGINT,
+    "unemployed_id" BIGINT
+);
+
 CREATE TABLE "employment_history" (
     "id" SERIAL PRIMARY KEY,
     "unemployed_id" INT,

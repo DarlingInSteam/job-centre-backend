@@ -32,4 +32,13 @@ public class JobVacancyController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @PostMapping("/apply_vacancy")
+    public ResponseEntity applyVacancyUnemployed(@RequestParam long id, @RequestParam String username) {
+        try {
+            return ResponseEntity.ok(service.ApplyVacancyUnemployed(id, username));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
