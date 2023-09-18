@@ -1,5 +1,6 @@
 package com.example.jobcentrebackend.controller;
 
+import com.example.jobcentrebackend.dto.employer.AcceptUnemployedRequest;
 import com.example.jobcentrebackend.dto.employer.CreateEmployerRequest;
 import com.example.jobcentrebackend.service.employer.EmployerService;
 import lombok.RequiredArgsConstructor;
@@ -45,6 +46,15 @@ public class EmployerController {
     public ResponseEntity getAppliesVacancies(@RequestParam String username) {
         try {
             return ResponseEntity.ok(service.getAppliesForVacancies(username));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/accept_unemployed")
+    public ResponseEntity acceptUnemployed(@RequestBody AcceptUnemployedRequest request) {
+        try {
+            return ResponseEntity.ok(service.acceptUnemployed(request.getVacancyId(), request.getUsernameEmployed(), request.getUsernameUnemployed()));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

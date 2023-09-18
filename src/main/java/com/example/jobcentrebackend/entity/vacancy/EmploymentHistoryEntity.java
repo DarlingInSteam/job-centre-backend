@@ -27,7 +27,7 @@ public class EmploymentHistoryEntity {
 
     @OneToOne
     @JoinColumn(name = "job_vacancy_id")
-    private JobVacancyEntity jobVacancie;
+    private JobVacancyEntity jobVacancy;
 
     @OneToOne
     @JoinColumn(name = "employer_id")

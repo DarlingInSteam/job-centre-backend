@@ -77,11 +77,12 @@ public class JobVacanciesService {
     }
 
     public GetJobVacancyResponse getJobVacancy(String jobTitle) throws JobVacacyNotFoundException {
-        JobVacancyEntity jobVacancyEntity = repository.findByJobTitle(jobTitle)
-                .orElseThrow(() -> new JobVacacyNotFoundException("Job vacancy not found"));
-        JobRequirementEntity jobRequirementEntity = jobRequirementsRepository.findById(
-                        repository.findByJobTitle(jobTitle).get().getRequirementsId())
-                .orElseThrow(() -> new JobVacacyNotFoundException("Job vacancy not found"));
+        JobVacancyEntity jobVacancyEntity = repository
+                .findByJobTitle(jobTitle)
+                    .orElseThrow(() -> new JobVacacyNotFoundException("Job vacancy not found"));
+        JobRequirementEntity jobRequirementEntity = jobRequirementsRepository
+                .findById(repository.findByJobTitle(jobTitle).get().getRequirementsId())
+                    .orElseThrow(() -> new JobVacacyNotFoundException("Job vacancy not found"));
 
         return GetJobVacancyResponse.builder()
                 .jobVacancy(JobVacanciesDto.toDto(jobVacancyEntity))
@@ -91,8 +92,9 @@ public class JobVacanciesService {
     }
 
     public boolean ApplyVacancyUnemployed(long vacancyId, String username) throws JobVacacyNotFoundException, UserNotFoundException, UnemployedNotFoundException {
-        JobVacancyEntity jobVacancyEntity = repository.findById(vacancyId)
-                .orElseThrow(() -> new JobVacacyNotFoundException("Job vacancy not found"));
+        JobVacancyEntity jobVacancyEntity = repository
+                .findById(vacancyId)
+                    .orElseThrow(() -> new JobVacacyNotFoundException("Job vacancy not found"));
         UnemployedEntity unemployedEntity = unemployedRepository
                 .findByUser(userRepository.findByUsername(username)
                         .orElseThrow(() -> new UserNotFoundException("User not found")))

@@ -13,6 +13,7 @@ import com.example.jobcentrebackend.repository.passport.PassportRepository;
 import com.example.jobcentrebackend.repository.unemployed.UnemployedRepository;
 import com.example.jobcentrebackend.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -24,6 +25,9 @@ public class UnemployedService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private PassportRepository passportRepository;
@@ -50,7 +54,7 @@ public class UnemployedService {
         var a = passportRepository.save(PassportEntity
                 .builder()
                 .dateOfBirth(request.getDateOfBirth())
-                .passportNumber(request.getPassportNumber())
+                .passportNumber(passwordEncoder.encode(request.getPassportNumber()))
                 .passportIssueDate(request.getPassportIssueDate())
                 .passportIssuedBy(request.getPassportIssueBy())
                 .photo(request.getPhoto())

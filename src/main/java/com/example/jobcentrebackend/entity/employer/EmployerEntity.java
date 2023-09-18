@@ -5,6 +5,7 @@ import com.example.jobcentrebackend.entity.user.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Random;
 import java.util.Set;
 
 @Entity
