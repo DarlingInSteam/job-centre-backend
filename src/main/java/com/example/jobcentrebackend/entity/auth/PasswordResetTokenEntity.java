@@ -15,7 +15,6 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 @Table(name="password_reset_tokens")
-
 public class PasswordResetTokenEntity {
     @Id
     @GeneratedValue

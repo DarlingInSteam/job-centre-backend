@@ -40,7 +40,7 @@ public class UnemployedService {
                 .orElseThrow(() -> new UnemployedNotFoundException("Unemployed noy found"))
         );
     }
-
+    
     public String createUnemployed(CreateUnemployedRequest request) throws UnemployedAlreadyExists, UserNotFoundException, UserHasInappropriateRole {
         if(unemployedRepository.findByUser(userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new UserNotFoundException("User not found"))).isPresent()) {

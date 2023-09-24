@@ -41,4 +41,13 @@ public class JobVacancyController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @PostMapping("/archived_vacancy")
+    public ResponseEntity archivedVacancy(@RequestParam long id) {
+        try {
+            return ResponseEntity.ok(service.archivedVacancy(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

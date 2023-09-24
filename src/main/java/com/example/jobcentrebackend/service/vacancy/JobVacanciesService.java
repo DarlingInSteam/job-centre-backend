@@ -110,4 +110,16 @@ public class JobVacanciesService {
 
         return true;
     }
+
+    public String archivedVacancy(long vacancyId) throws JobVacacyNotFoundException {
+        JobVacancyEntity jobVacancyEntity = repository
+                .findById(vacancyId)
+                .orElseThrow(() -> new JobVacacyNotFoundException("Job vacancy not found"));
+
+        jobVacancyEntity.setArchived(true);
+
+        repository.save(jobVacancyEntity);
+
+        return "Job vacancy was successfully archived";
+    }
 }
