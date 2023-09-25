@@ -50,4 +50,13 @@ public class JobVacancyController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @PostMapping("/update_vacancy")
+    public ResponseEntity updateVacancy(@RequestBody CreateJobVacancyRequest request, @RequestParam long id) {
+        try {
+            return ResponseEntity.ok(service.updateVacancy(request, id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

@@ -11,6 +11,7 @@ import com.example.jobcentrebackend.entity.vacancy.JobVacancyEntity;
 import com.example.jobcentrebackend.exception.employer.EmployerNotFoundException;
 import com.example.jobcentrebackend.exception.unemployed.UnemployedNotFoundException;
 import com.example.jobcentrebackend.exception.user.UserNotFoundException;
+import com.example.jobcentrebackend.exception.vacancy.JobRequirementsNotFound;
 import com.example.jobcentrebackend.exception.vacancy.JobVacacyNotFoundException;
 import com.example.jobcentrebackend.exception.vacancy.VacancyAlreadyExists;
 import com.example.jobcentrebackend.repository.unemployed.UnemployedRepository;
@@ -114,12 +115,35 @@ public class JobVacanciesService {
     public String archivedVacancy(long vacancyId) throws JobVacacyNotFoundException {
         JobVacancyEntity jobVacancyEntity = repository
                 .findById(vacancyId)
-                .orElseThrow(() -> new JobVacacyNotFoundException("Job vacancy not found"));
+                    .orElseThrow(() -> new JobVacacyNotFoundException("Job vacancy not found"));
 
         jobVacancyEntity.setArchived(true);
 
         repository.save(jobVacancyEntity);
 
         return "Job vacancy was successfully archived";
+    }
+
+    public String updateVacancy(CreateJobVacancyRequest request, long id) throws JobVacacyNotFoundException, JobRequirementsNotFound {
+        JobVacancyEntity jobVacancyEntity = repository
+                .findById(id)
+                    .orElseThrow(() -> new JobVacacyNotFoundException("Job vacancy not found"));
+
+        jobVacancyEntity.setJobTitle(request.getJobTitle());
+        jobVacancyEntity.setJobType(request.getJobType());
+        jobVacancyEntity.setSalary(request.getSalary());
+
+        JobRequirementEntity jobRequirementEntity = jobRequirementsRepository
+                .findById(jobVacancyEntity.getRequirementsId())
+                    .orElseThrow(() -> new JobRequirementsNotFound("Job Requirements not found"));
+
+        jobRequirementEntity.setAgeRange(request.getCreateJobRequirementsRequest().getAgeRange());
+        jobRequirementEntity.setEducationLevel(request.getCreateJobRequirementsRequest().getEducationLevel());
+        jobRequirementEntity.setWorkExperience(request.getCreateJobRequirementsRequest().getWorkExperience());
+
+        jobRequirementsRepository.save(jobRequirementEntity);
+        repository.save(jobVacancyEntity);
+
+        return "Job vacancy was successfully updated";
     }
 }
