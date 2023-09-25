@@ -37,6 +37,18 @@ public class PassportService {
         passportEntity.setPhoto(request.getPhoto());
         passportEntity.setDateOfBirth(request.getDateOfBirth());
 
+        repository.save(passportEntity);
+
         return "Passport was successfully update";
+    }
+
+    public String removePassport(long id) throws PassportNotFoundException {
+        PassportEntity passportEntity = repository
+                .findById(id)
+                   .orElseThrow(() -> new PassportNotFoundException("Passport not found"));
+
+        repository.delete(passportEntity);
+
+        return "Passport was successfully removed";
     }
 }

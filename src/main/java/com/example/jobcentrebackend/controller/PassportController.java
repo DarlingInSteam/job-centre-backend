@@ -31,4 +31,13 @@ public class PassportController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @PostMapping("/remove_passport")
+    public ResponseEntity removePassport(@RequestParam long id) {
+        try {
+            return ResponseEntity.ok(service.removePassport(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
