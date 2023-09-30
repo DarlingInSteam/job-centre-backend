@@ -25,12 +25,12 @@ public class UserService {
     @Autowired
     private UnemployedRepository unemployedRepository;
 
-    public String updateUsername(@NotNull String username) throws UserNotFoundException {
+    public String updateUsername(@NotNull String username, @NotNull String newUsername) throws UserNotFoundException {
         var user = userRepository
                 .findByUsername(username)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
 
-        user.setUsername(username);
+        user.setUsername(newUsername);
 
         userRepository.save(user);
 

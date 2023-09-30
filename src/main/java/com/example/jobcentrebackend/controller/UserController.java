@@ -37,4 +37,13 @@ public class UserController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @PostMapping("/update_username")
+    public ResponseEntity updateUsername(@RequestParam String username, @RequestParam String newUsername) {
+        try {
+            return ResponseEntity.ok(userService.updateUsername(username, newUsername));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

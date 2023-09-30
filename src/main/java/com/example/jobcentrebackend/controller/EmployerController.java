@@ -59,4 +59,13 @@ public class EmployerController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @PostMapping("/reject_unemployed")
+    public ResponseEntity rejectUnemployed(@RequestBody AcceptUnemployedRequest request) {
+        try {
+            return ResponseEntity.ok(service.rejectUnemployed(request.getVacancyId(), request.getUsernameEmployed(), request.getUsernameUnemployed()));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

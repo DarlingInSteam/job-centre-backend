@@ -22,7 +22,7 @@ public class PassportController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
+    
     @PostMapping("/update_passport")
     public ResponseEntity updatePassport(@RequestBody CreatePassportRequest request, @RequestParam long id) {
         try {
