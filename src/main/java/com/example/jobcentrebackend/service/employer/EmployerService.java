@@ -162,6 +162,34 @@ public class EmployerService {
         return "Unemployed was successfully applied";
     }
 
+    public String rejectUnemployed(long vacancyId, String usernameEmployed, String usernameUnemployed) throws UserNotFoundException, EmployerNotFoundException, UnemployedNotFoundException {
+        EmployerEntity employerEntity = employerRepository
+                .findByUser(userRepository.findByUsername(usernameEmployed)
+                        .orElseThrow(() -> new UserNotFoundException("User not found")))
+                .orElseThrow(() -> new EmployerNotFoundException("Employer not found"));
+
+        UnemployedEntity unemployedEntity = unemployedRepository
+                .findByUser(userRepository.findByUsername(usernameUnemployed)
+                        .orElseThrow(() -> new UserNotFoundException("User not found")))
+                .orElseThrow(() -> new UnemployedNotFoundException("Unemployed not found"));
+
+        List<JobVacancyEntity> vacancies = employerEntity.getJobVacancyEntity().stream().toList();
+        JobVacancyEntity needVacancy = new JobVacancyEntity();
+
+        for(var vacancy: vacancies) {
+            if(vacancy.getId() == vacancyId) {
+                needVacancy = vacancy;
+                break;
+            }
+        }
+
+        needVacancy.getUnemployedEntities().remove(unemployedEntity);
+
+        jobVacanciesRepository.save(needVacancy);
+
+        return "Unemployed was successfully reject";
+    }
+
     public List<AppliesForVacancies> getAppliesForVacancies(String username) throws UserNotFoundException, EmployerNotFoundException {
         EmployerEntity employerEntity = employerRepository
                 .findByUser(userRepository.findByUsername(username)
