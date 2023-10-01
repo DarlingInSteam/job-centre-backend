@@ -190,6 +190,8 @@ public class EmployerService {
         return "Unemployed was successfully reject";
     }
 
+
+
     public List<AppliesForVacancies> getAppliesForVacancies(String username) throws UserNotFoundException, EmployerNotFoundException {
         EmployerEntity employerEntity = employerRepository
                 .findByUser(userRepository.findByUsername(username)
