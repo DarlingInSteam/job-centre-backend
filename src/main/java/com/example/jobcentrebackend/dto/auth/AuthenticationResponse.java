@@ -1,5 +1,6 @@
 package com.example.jobcentrebackend.dto.auth;
 
+import com.example.jobcentrebackend.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,4 +14,5 @@ public class AuthenticationResponse {
     private String accessToken;
     private String token;
     private String username;
+    private Role role;
 }

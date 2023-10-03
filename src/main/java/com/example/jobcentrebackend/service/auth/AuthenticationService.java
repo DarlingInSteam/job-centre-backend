@@ -12,6 +12,7 @@ import com.example.jobcentrebackend.exception.auth.UsernameIsOccupiedException;
 import com.example.jobcentrebackend.exception.user.UserNotFoundException;
 import com.example.jobcentrebackend.repository.auth.PasswordResetTokenRepository;
 import com.example.jobcentrebackend.repository.user.UserRepository;
+import com.example.jobcentrebackend.service.user.UserService;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -45,8 +46,13 @@ public class AuthenticationService {
     @Autowired
     private RefreshTokenService refreshTokenService;
 
+    @Autowired
+    private UserService userService;
+
     public AuthenticationResponse register(RegisterRequest request) throws UsernameIsOccupiedException, UserNotFoundException {
         validateRegisterRequest(request);
+
+        var userRole = userService.getUserUsername(request.getUsername());
 
         var user = UserEntity.builder()
                 .phone(request.getPhone())
@@ -65,10 +71,14 @@ public class AuthenticationService {
                 .accessToken(jwtToken)
                 .token(refreshToken.getToken())
                 .username(user.getUsername())
+                .role(userRole.getRole())
                 .build();
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) throws UserNotFoundException {
+        var userRole = userService.getUserUsername(request.getUsername());
+
+
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(),
@@ -86,6 +96,7 @@ public class AuthenticationService {
                 .accessToken(jwtToken)
                 .token(refreshToken.getToken())
                 .username(user.getUsername())
+                .role(userRole.getRole())
                 .build();
     }
 

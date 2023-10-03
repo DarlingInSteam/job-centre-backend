@@ -10,6 +10,7 @@ import com.example.jobcentrebackend.service.auth.AuthenticationService;
 import com.example.jobcentrebackend.service.auth.JwtService;
 import com.example.jobcentrebackend.service.auth.RefreshTokenService;
 import com.example.jobcentrebackend.entity.auth.RefreshToken;
+import com.example.jobcentrebackend.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ public class AuthenticationController {
     private final AuthenticationService service;
     private final JwtService jwtService;
     private final RefreshTokenService refreshTokenService;
+    private final UserService userService;
 
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody RegisterRequest request) {
@@ -59,8 +61,10 @@ public class AuthenticationController {
     }
 
     @PostMapping("/refresh")
-    public AuthenticationResponse refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest) throws RefreshTokenNotFoundException {
+    public AuthenticationResponse refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest) throws RefreshTokenNotFoundException, UserNotFoundException {
         String refreshToken = refreshTokenRequest.getToken();
+        var userRole = userService.getUserUsername(refreshTokenRequest.getUsername());
+
         return refreshTokenService.findByToken(refreshToken)
                 .map(refreshTokenService::verifyExpiration)
                 .map(RefreshToken::getUser)
@@ -70,6 +74,8 @@ public class AuthenticationController {
                             .builder()
                             .accessToken(accessToken)
                             .token(refreshToken)
+                            .username(refreshTokenRequest.getUsername())
+                            .role(userRole.getRole())
                             .build();
                 }).orElseThrow(() -> new RefreshTokenNotFoundException("Refresh token not found"));
     }
