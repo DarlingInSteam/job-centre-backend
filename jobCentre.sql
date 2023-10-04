@@ -8,12 +8,12 @@ CREATE TYPE "education_level" AS ENUM (
     'BACHELOR', -- ВЫСШЕЕ ОБРАЗОВАНИЕ – БАКАЛАВРИАТ
     'MASTER', -- ВЫСШЕЕ ОБРАЗОВАНИЕ – СПЕЦИАЛИТЕТ ИЛИ МАГИСТРАТУРА
     'POSTGRADUATE' -- ВЫСШЕЕ ОБРАЗОВАНИЕ – ПОДГОТОВКА КАДРОВ ВЫСШЕЙ КВАЛИФИКАЦИИ ПО ПРОГРАММАМ ПОДГОТОВКИ НАУЧНО-ПЕДАГОГИЧЕСКИХ КАДРОВ В АСПИРАНТУРЕ (АДЪЮНКТУРЕ), ПО ПРОГРАММАМ ОРДИНАТУРЫ, ПО ПРОГРАММАМ АССИСТЕНТУРЫ-СТАЖИРОВКИ
-);
+    );
 
 CREATE TYPE "role" AS ENUM (
     'UNEMPLOYED',
     'EMPLOYED'
-);
+    );
 
 CREATE TABLE "users" (
     "id" BIGSERIAL PRIMARY KEY,
@@ -62,10 +62,10 @@ CREATE TABLE "unemployed" (
 );
 
 CREATE TABLE "employers" (
-     "id" SERIAL PRIMARY KEY,
-     "user_id" BIGINT,
-     "employer_name" VARCHAR(255) NOT NULL,
-     "address" TEXT
+    "id" SERIAL PRIMARY KEY,
+    "user_id" BIGINT,
+    "employer_name" VARCHAR(255) NOT NULL,
+    "address" TEXT
 );
 
 CREATE TABLE "employer_job_vacancies" (
@@ -81,12 +81,12 @@ CREATE TABLE "job_requirements" (
 );
 
 CREATE TABLE "job_vacancies" (
-     "id" SERIAL PRIMARY KEY,
-     "job_type" VARCHAR(255),
-     "job_title" VARCHAR(255) NOT NULL,
-     "salary" INT,
-     "requirements_id" INT,
-     "archived" BOOLEAN DEFAULT FALSE
+    "id" SERIAL PRIMARY KEY,
+    "job_type" VARCHAR(255),
+    "job_title" VARCHAR(255) NOT NULL,
+    "salary" INT,
+    "requirements_id" INT,
+    "archived" BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE "vacancies_apply_unemployed" (
@@ -105,7 +105,27 @@ CREATE TABLE "employment_history" (
     "archived" BOOLEAN DEFAULT FALSE
 );
 
+-- TODO
+CREATE TABLE "job_title" (
+    "id" SERIAL PRIMARY KEY
+);
+
+-- TODO
+CREATE TABLE "specialist" (
+    "id" SERIAL PRIMARY KEY
+);
+
 ALTER TABLE "refresh_tokens" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+
+ALTER TABLE "vacancies_apply_unemployed" ADD FOREIGN KEY ("vacancy_id") REFERENCES "job_vacancies" ("id");
+
+ALTER TABLE "vacancies_apply_unemployed" ADD FOREIGN KEY ("unemployed_id") REFERENCES "unemployed" ("id");
+
+ALTER TABLE "employer_job_vacancies" ADD FOREIGN KEY ("employer_id") REFERENCES "employers" ("id");
+
+ALTER TABLE "employer_job_vacancies" ADD FOREIGN KEY ("vacancy_id") REFERENCES "job_vacancies" ("id");
+
+ALTER TABLE "password_reset_tokens" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
 ALTER TABLE "job_vacancies" ADD FOREIGN KEY ("requirements_id") REFERENCES "job_requirements" ("id");
 

@@ -30,4 +30,13 @@ public class UnemployedController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @GetMapping("/get_all_unemployed")
+    public ResponseEntity getALlUnemployed() {
+        try {
+            return ResponseEntity.ok(service.getAllUnemployed());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

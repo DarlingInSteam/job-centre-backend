@@ -25,7 +25,7 @@ public class SecurityConfiguration {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/auth/**", "/employer/create").permitAll()
                 )
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/user/**", "/unemployed/**", "/employer/**", "/job_vacancy/**", "/passport/**").authenticated()

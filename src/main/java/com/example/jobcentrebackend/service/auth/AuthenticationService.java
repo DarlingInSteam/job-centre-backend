@@ -52,7 +52,7 @@ public class AuthenticationService {
     public AuthenticationResponse register(RegisterRequest request) throws UsernameIsOccupiedException, UserNotFoundException {
         validateRegisterRequest(request);
 
-        var userRole = userService.getUserUsername(request.getUsername());
+        var userRole = request.getRole();
 
         var user = UserEntity.builder()
                 .phone(request.getPhone())
@@ -71,7 +71,7 @@ public class AuthenticationService {
                 .accessToken(jwtToken)
                 .token(refreshToken.getToken())
                 .username(user.getUsername())
-                .role(userRole.getRole())
+                .role(userRole)
                 .build();
     }
 

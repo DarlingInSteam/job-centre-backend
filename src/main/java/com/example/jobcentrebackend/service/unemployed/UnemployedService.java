@@ -16,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class UnemployedService {
@@ -40,7 +42,18 @@ public class UnemployedService {
                 .orElseThrow(() -> new UnemployedNotFoundException("Unemployed noy found"))
         );
     }
-    
+
+    public List<UnemployedDto> getAllUnemployed() {
+        var unemployedList = unemployedRepository.findAll();
+        List<UnemployedDto> unemployedDtoList = new ArrayList<>();
+
+        for (var unemployed: unemployedList) {
+            unemployedDtoList.add(UnemployedDto.toDto(unemployed));
+        }
+
+        return unemployedDtoList;
+    }
+
     public String createUnemployed(CreateUnemployedRequest request) throws UnemployedAlreadyExists, UserNotFoundException, UserHasInappropriateRole {
         if(unemployedRepository.findByUser(userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new UserNotFoundException("User not found"))).isPresent()) {
