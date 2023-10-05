@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+  <persistence-unit name="default">
+    <class>com.example.jobcentrebackend.entity.auth.RefreshToken</class>
+    <class>com.example.jobcentrebackend.entity.auth.PasswordResetTokenEntity</class>
+    <class>com.example.jobcentrebackend.entity.employer.EmployerEntity</class>
+    <class>com.example.jobcentrebackend.entity.unemployed.UnemployedEntity</class>
+    <class>com.example.jobcentrebackend.entity.passport.PassportEntity</class>
+    <class>com.example.jobcentrebackend.entity.user.UserEntity</class>
+    <class>com.example.jobcentrebackend.entity.vacancy.JobRequirementEntity</class>
+    <class>com.example.jobcentrebackend.entity.vacancy.JobVacancyEntity</class>
+    <class>com.example.jobcentrebackend.entity.vacancy.EmploymentHistoryEntity</class>
+  </persistence-unit>
+    <persistence-unit name="persistenceUnit"/>
+</persistence>
