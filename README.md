@@ -47,3 +47,12 @@ The project uses the following dependencies:
 - [org.springframework.boot:spring-boot-configuration-processor](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-configuration-processor) - Spring Boot configuration processor.
 - [org.springframework.boot:spring-boot-starter-test](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test) - Spring Boot starter for modular testing.
 - [org.springframework.security:spring-security-test](https://mvnrepository.com/artifact/org.springframework.security/spring-security-test) - Modular testing for Spring Security.
+
+## Contributing
+
+Contributions to the development of this application are welcome. If you would like to contribute, please follow the [Contribution Guidelines](https://github.com/DarlingInSteam/job-centre-backend/blob/master/CODE_OF_CONDUCT.md).
+
+## License
+
+This project is licensed under the [MIT License](https://github.com/DarlingInSteam/job-centre-backend/blob/master/LICENSE).
+
