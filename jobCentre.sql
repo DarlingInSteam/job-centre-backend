@@ -61,6 +61,16 @@ CREATE TABLE "unemployed" (
     "registration_date" TIMESTAMP WITHOUT TIME ZONE
 );
 
+CREATE TABLE "ability" (
+    "id" SERIAL PRIMARY KEY,
+    "text" VARCHAR(40) UNIQUE
+);
+
+CREATE TABLE "unemployed_ability" (
+    "ability_id" BIGINT,
+    "unemployed_id" BIGINT
+);
+
 CREATE TABLE "employers" (
     "id" SERIAL PRIMARY KEY,
     "user_id" BIGINT,
@@ -114,6 +124,10 @@ CREATE TABLE "job_title" (
 CREATE TABLE "specialist" (
     "id" SERIAL PRIMARY KEY
 );
+
+ALTER TABLE "unemployed_ability" ADD FOREIGN KEY ("unemployed_id") REFERENCES "unemployed" ("id");
+
+ALTER TABLE "unemployed_ability" ADD FOREIGN KEY ("ability_id") REFERENCES "ability" ("id");
 
 ALTER TABLE "refresh_tokens" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 

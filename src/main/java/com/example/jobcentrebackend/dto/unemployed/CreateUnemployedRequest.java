@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Builder
@@ -27,4 +28,5 @@ public class CreateUnemployedRequest {
     private String speciality;
     private int workExperience;
     private String username;
+    private List<Long> abilities_ids;
 }

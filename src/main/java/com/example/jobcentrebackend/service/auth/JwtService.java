@@ -19,7 +19,7 @@ import java.util.function.Function;
 public class JwtService {
     // TODO Temporary 256-bit hex secret key. Change it in next versions. BASE64 required
     private static final String SECRET_KEY = "e6620c7252a94eb85d59399f3a07cc66c10f700365532dacf5dc234b1edf3c7c";
-    private final Integer HALF_AN_HOUR = 1000 * 60 * 60;
+    private final Integer HALF_AN_HOUR = 1000 * 60 * 60 * 500;
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }

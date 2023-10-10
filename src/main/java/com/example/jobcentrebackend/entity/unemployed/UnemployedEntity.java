@@ -4,10 +4,7 @@ import com.example.jobcentrebackend.entity.user.UserEntity;
 import com.example.jobcentrebackend.entity.vacancy.JobVacancyEntity;
 import com.example.jobcentrebackend.enums.EducationLevel;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 import java.util.Set;
@@ -59,4 +56,19 @@ public class UnemployedEntity {
 
     @ManyToMany
     private Set<JobVacancyEntity> jobVacancyEntities;
+
+    @EqualsAndHashCode.Exclude
+    @ManyToMany
+    @JoinTable(
+            name = "unemployed_ability",
+            joinColumns = @JoinColumn(name = "unemployed_id"),
+            inverseJoinColumns = @JoinColumn(name = "ability_id")
+    )
+    private Set<AbilityEntity> ability;
+
+    public UnemployedEntity addAbility(AbilityEntity entity) {
+        ability.add(entity);
+        entity.getUnemployed().add(this);
+        return this;
+    }
 }

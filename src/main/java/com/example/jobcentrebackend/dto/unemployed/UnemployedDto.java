@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Builder
@@ -24,6 +25,7 @@ public class UnemployedDto {
     private String speciality;
     private int workExperience;
     private Date registrationDate;
+    private List<AbilityDto> abilities;
 
     public static UnemployedDto toDto(UnemployedEntity entity) {
         return UnemployedDto
@@ -38,6 +40,11 @@ public class UnemployedDto {
                 .speciality(entity.getSpecialty())
                 .workExperience(entity.getWorkExperience())
                 .registrationDate(entity.getRegistrationDate())
+                .abilities(entity.getAbility()
+                        .stream()
+                        .map(AbilityDto::toDto)
+                        .toList()
+                )
                 .build();
     }
 }
