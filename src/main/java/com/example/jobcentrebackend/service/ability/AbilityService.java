@@ -1,9 +1,9 @@
-package com.example.jobcentrebackend.service.unemployed;
+package com.example.jobcentrebackend.service.ability;
 
-import com.example.jobcentrebackend.dto.unemployed.AbilityDto;
-import com.example.jobcentrebackend.entity.unemployed.AbilityEntity;
-import com.example.jobcentrebackend.exception.unemployed.AbilityAlreadyExists;
-import com.example.jobcentrebackend.repository.unemployed.AbilityRepository;
+import com.example.jobcentrebackend.dto.ability.AbilityDto;
+import com.example.jobcentrebackend.entity.ability.AbilityEntity;
+import com.example.jobcentrebackend.exception.ability.AbilityAlreadyExists;
+import com.example.jobcentrebackend.repository.ability.AbilityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,5 +1,6 @@
 package com.example.jobcentrebackend.entity.unemployed;
 
+import com.example.jobcentrebackend.entity.ability.AbilityEntity;
 import com.example.jobcentrebackend.entity.user.UserEntity;
 import com.example.jobcentrebackend.entity.vacancy.JobVacancyEntity;
 import com.example.jobcentrebackend.enums.EducationLevel;

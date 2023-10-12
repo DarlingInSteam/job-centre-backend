@@ -1,5 +1,6 @@
 package com.example.jobcentrebackend.dto.unemployed;
 
+import com.example.jobcentrebackend.dto.ability.AbilityDto;
 import com.example.jobcentrebackend.entity.unemployed.UnemployedEntity;
 import com.example.jobcentrebackend.enums.EducationLevel;
 import lombok.AllArgsConstructor;

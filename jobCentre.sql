@@ -58,7 +58,8 @@ CREATE TABLE "unemployed" (
     "education_document_data" VARCHAR(255),
     "specialty" VARCHAR(255),
     "work_experience" INT,
-    "registration_date" TIMESTAMP WITHOUT TIME ZONE
+    "registration_date" TIMESTAMP WITHOUT TIME ZONE,
+    "about_me" TEXT
 );
 
 CREATE TABLE "ability" (
@@ -75,7 +76,9 @@ CREATE TABLE "employers" (
     "id" SERIAL PRIMARY KEY,
     "user_id" BIGINT,
     "employer_name" VARCHAR(255) NOT NULL,
-    "address" TEXT
+    "address" TEXT,
+    "about_company" TEXT,
+    "company_photo" VARCHAR(255)
 );
 
 CREATE TABLE "employer_job_vacancies" (

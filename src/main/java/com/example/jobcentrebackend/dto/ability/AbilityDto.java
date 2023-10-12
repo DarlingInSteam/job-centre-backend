@@ -1,6 +1,6 @@
-package com.example.jobcentrebackend.dto.unemployed;
+package com.example.jobcentrebackend.dto.ability;
 
-import com.example.jobcentrebackend.entity.unemployed.AbilityEntity;
+import com.example.jobcentrebackend.entity.ability.AbilityEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

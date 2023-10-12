@@ -1,7 +1,6 @@
 package com.example.jobcentrebackend.controller;
 
-import com.example.jobcentrebackend.dto.auth.RegisterRequest;
-import com.example.jobcentrebackend.service.unemployed.AbilityService;
+import com.example.jobcentrebackend.service.ability.AbilityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

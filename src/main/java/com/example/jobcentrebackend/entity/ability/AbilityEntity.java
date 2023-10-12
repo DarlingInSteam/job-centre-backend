@@ -1,5 +1,6 @@
-package com.example.jobcentrebackend.entity.unemployed;
+package com.example.jobcentrebackend.entity.ability;
 
+import com.example.jobcentrebackend.entity.unemployed.UnemployedEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
