@@ -24,6 +24,24 @@ public class EmployerController {
         }
     }
 
+    @PostMapping("/add_photo")
+    public ResponseEntity addPhoto(@RequestParam String photo, @RequestParam Long id) {
+        try {
+            return ResponseEntity.ok(service.addCompanyPhoto(photo, id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/add_about_company")
+    public ResponseEntity addAboutCompany(@RequestParam String aboutCompany, @RequestParam Long id) {
+        try {
+            return ResponseEntity.ok(service.addAboutCompany(aboutCompany, id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @GetMapping("/get_employer")
     public ResponseEntity getEmployerByUsername(@RequestParam String username) {
         try {

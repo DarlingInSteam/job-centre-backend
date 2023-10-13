@@ -190,7 +190,29 @@ public class EmployerService {
         return "Unemployed was successfully reject";
     }
 
+    public String addCompanyPhoto(String photo, Long id) throws EmployerNotFoundException {
+        var entity = employerRepository
+                .findById(id)
+                .orElseThrow(() -> new EmployerNotFoundException("Employer not found"));
 
+        entity.setCompanyPhoto(photo);
+
+        employerRepository.save(entity);
+
+        return "Company photo was successfully added";
+    }
+
+    public String addAboutCompany(String aboutCompany, Long id) throws EmployerNotFoundException {
+        var entity = employerRepository
+                .findById(id)
+                .orElseThrow(() -> new EmployerNotFoundException("Employer not found"));
+
+        entity.setAboutCompany(aboutCompany);
+
+        employerRepository.save(entity);
+
+        return "About company was successfully added";
+    }
 
     public List<AppliesForVacancies> getAppliesForVacancies(String username) throws UserNotFoundException, EmployerNotFoundException {
         EmployerEntity employerEntity = employerRepository
