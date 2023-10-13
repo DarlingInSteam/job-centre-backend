@@ -45,7 +45,7 @@ public class UnemployedService {
                 .findByUser(userRepository.findByUsername(username)
                         .orElseThrow(() -> new UserNotFoundException("User not found"))
                 )
-                .orElseThrow(() -> new UnemployedNotFoundException("Unemployed noy found"))
+                .orElseThrow(() -> new UnemployedNotFoundException("Unemployed not found"))
         );
     }
 
@@ -119,5 +119,29 @@ public class UnemployedService {
                     .orElseThrow(() -> new AbilityNotFoundException("Ability not found"))
             );
         }
+    }
+
+    public String addAboutMe(String aboutMe, Long id) throws UnemployedNotFoundException {
+        var entity = unemployedRepository
+                .findById(id)
+                .orElseThrow(() -> new UnemployedNotFoundException("Unemployed not found"));
+
+        entity.setAboutMe(aboutMe);
+
+        unemployedRepository.save(entity);
+
+        return "About me was successfully added";
+    }
+
+    public String addPhoto(String photo, Long id) throws UnemployedNotFoundException {
+        var entity = unemployedRepository
+                .findById(id)
+                .orElseThrow(() -> new UnemployedNotFoundException("Unemployed not found"));
+
+        entity.setUnemployedPhoto(photo);
+
+        unemployedRepository.save(entity);
+
+        return "Photo was successfully added";
     }
 }

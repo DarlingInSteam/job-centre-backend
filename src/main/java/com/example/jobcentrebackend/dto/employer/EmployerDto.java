@@ -18,6 +18,8 @@ public class EmployerDto {
     private String employerName;
     private String address;
     private List<JobVacanciesDto> vacancies;
+    private String aboutCompany;
+    private String companyPhoto;
 
     public static EmployerDto toDto(EmployerEntity entity) {
         return EmployerDto
@@ -30,6 +32,8 @@ public class EmployerDto {
                         .map(JobVacanciesDto::toDto)
                         .toList()
                 )
+                .aboutCompany(entity.getAboutCompany())
+                .companyPhoto(entity.getCompanyPhoto())
                 .build();
     }
 }

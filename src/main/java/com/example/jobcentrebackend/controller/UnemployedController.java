@@ -22,6 +22,24 @@ public class UnemployedController {
         }
     }
 
+    @PostMapping("/add_about_me")
+    public ResponseEntity addAboutMe(@RequestParam String aboutMe, @RequestParam Long id) {
+        try {
+            return ResponseEntity.ok(service.addAboutMe(aboutMe, id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/add_photo")
+    public ResponseEntity addPhoto(@RequestParam String photo, @RequestParam Long id) {
+        try {
+            return ResponseEntity.ok(service.addPhoto(photo, id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @GetMapping("/get_unemployed")
     public ResponseEntity getUnemployedByUsername(@RequestParam String username) {
         try {

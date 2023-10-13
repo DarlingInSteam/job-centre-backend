@@ -30,6 +30,12 @@ public class EmployerEntity {
     @Column(name = "address")
     private String address;
 
+    @Column(name = "company_photo")
+    private String companyPhoto;
+
+    @Column(name = "about_company")
+    private String aboutCompany;
+
     @OneToMany
     @JoinTable(
             name = "employer_job_vacancies",

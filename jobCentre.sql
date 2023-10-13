@@ -59,7 +59,8 @@ CREATE TABLE "unemployed" (
     "specialty" VARCHAR(255),
     "work_experience" INT,
     "registration_date" TIMESTAMP WITHOUT TIME ZONE,
-    "about_me" TEXT
+    "about_me" TEXT,
+    "unemployed_photo" VARCHAR(255)
 );
 
 CREATE TABLE "ability" (

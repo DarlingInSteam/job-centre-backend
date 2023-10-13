@@ -55,6 +55,12 @@ public class UnemployedEntity {
     @Column(name = "registration_date")
     private Date registrationDate;
 
+    @Column(name = "about_me")
+    private String aboutMe;
+
+    @Column(name = "unemployed_photo")
+    private String unemployedPhoto;
+
     @ManyToMany
     private Set<JobVacancyEntity> jobVacancyEntities;
 

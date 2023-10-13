@@ -27,6 +27,8 @@ public class UnemployedDto {
     private int workExperience;
     private Date registrationDate;
     private List<AbilityDto> abilities;
+    private String aboutMe;
+    private String unemployedPhoto;
 
     public static UnemployedDto toDto(UnemployedEntity entity) {
         return UnemployedDto
@@ -46,6 +48,8 @@ public class UnemployedDto {
                         .map(AbilityDto::toDto)
                         .toList()
                 )
+                .unemployedPhoto(entity.getUnemployedPhoto())
+                .aboutMe(entity.getAboutMe())
                 .build();
     }
 }
