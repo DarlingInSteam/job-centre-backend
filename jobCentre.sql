@@ -119,14 +119,16 @@ CREATE TABLE "employment_history" (
     "archived" BOOLEAN DEFAULT FALSE
 );
 
--- TODO
 CREATE TABLE "job_title" (
-    "id" SERIAL PRIMARY KEY
+    "id" SERIAL PRIMARY KEY,
+    "about_job" TEXT,
+    "title" TEXT
 );
 
--- TODO
 CREATE TABLE "specialist" (
-    "id" SERIAL PRIMARY KEY
+    "id" SERIAL PRIMARY KEY,
+    "user_id" BIGINT,
+    "full_name" TEXT
 );
 
 ALTER TABLE "unemployed_ability" ADD FOREIGN KEY ("unemployed_id") REFERENCES "unemployed" ("id");
@@ -148,6 +150,12 @@ ALTER TABLE "password_reset_tokens" ADD FOREIGN KEY ("user_id") REFERENCES "user
 ALTER TABLE "job_vacancies" ADD FOREIGN KEY ("requirements_id") REFERENCES "job_requirements" ("id");
 
 ALTER TABLE "unemployed" ADD FOREIGN KEY ("passport_id") REFERENCES "passports" ("id");
+
+ALTER TABLE "unemployed" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+
+ALTER TABLE "employers" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+
+ALTER TABLE "specialist" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
 ALTER TABLE "employment_history" ADD FOREIGN KEY ("unemployed_id") REFERENCES "unemployed" ("id");
 

@@ -92,7 +92,7 @@ public class JobVacanciesService {
 
     }
 
-    public boolean ApplyVacancyUnemployed(long vacancyId, String username) throws JobVacacyNotFoundException, UserNotFoundException, UnemployedNotFoundException {
+    public String ApplyVacancyUnemployed(long vacancyId, String username) throws JobVacacyNotFoundException, UserNotFoundException, UnemployedNotFoundException {
         JobVacancyEntity jobVacancyEntity = repository
                 .findById(vacancyId)
                     .orElseThrow(() -> new JobVacacyNotFoundException("Job vacancy not found"));
@@ -109,7 +109,7 @@ public class JobVacanciesService {
 
         repository.save(jobVacancyEntity);
 
-        return true;
+        return "Unemployed was successfully apply";
     }
 
     public String archivedVacancy(long vacancyId) throws JobVacacyNotFoundException {
