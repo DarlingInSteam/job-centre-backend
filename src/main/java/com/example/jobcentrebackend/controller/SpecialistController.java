@@ -23,7 +23,7 @@ public class SpecialistController {
         }
     }
 
-    @PostMapping("/get_specialist")
+    @GetMapping("/get_specialist")
     public ResponseEntity getSpecialistByUsername(@RequestParam String username ) {
         try {
             return ResponseEntity.ok(service.getSpecialistByUsername(username));

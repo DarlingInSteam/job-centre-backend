@@ -190,4 +190,25 @@ public class UnemployedService {
 
         return "Access was successfully create";
     }
+
+    public String removeInvite(long vacancyId, long unemployedId) throws UnemployedNotFoundException {
+        var unemployed = unemployedRepository
+                .findById(unemployedId)
+                .orElseThrow(() -> new UnemployedNotFoundException("Unemployed not found"));
+
+        var vacancies = unemployed.getEntities();
+
+        for (int i = 0; i < vacancies.size(); i++) {
+            if (vacancies.stream().toList().get(i).getId() == vacancyId) {
+                vacancies.remove(vacancies.stream().toList().get(i));
+                break;
+            }
+        }
+
+        unemployed.setEntities(vacancies);
+
+        unemployedRepository.save(unemployed);
+
+        return "Access was successfully remove";
+    }
 }
