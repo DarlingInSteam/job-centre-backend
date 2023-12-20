@@ -42,6 +42,24 @@ public class EmployerController {
         }
     }
 
+    @PostMapping("/add_new_name")
+    public ResponseEntity addNewName(@RequestParam String newName, @RequestParam Long id) {
+        try {
+            return ResponseEntity.ok(service.addCompanyName(newName, id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/add_new_address")
+    public ResponseEntity addNewAddress(@RequestParam String newAddress, @RequestParam Long id) {
+        try {
+            return ResponseEntity.ok(service.addCompanyAddress(newAddress, id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @GetMapping("/get_employer")
     public ResponseEntity getEmployerByUsername(@RequestParam String username) {
         try {

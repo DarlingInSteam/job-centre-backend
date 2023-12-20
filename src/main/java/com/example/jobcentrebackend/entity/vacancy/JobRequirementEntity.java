@@ -24,8 +24,11 @@ public class JobRequirementEntity {
     @Enumerated(STRING)
     private EducationLevel educationLevel;
 
-    @Column(name = "age_range")
-    private int[] ageRange;
+    @Column(name = "age_range_upper")
+    private int ageRangeUpper;
+
+    @Column(name = "age_range_lower")
+    private int ageRangeLower;
 
     @Column(name = "work_experience")
     private int workExperience;

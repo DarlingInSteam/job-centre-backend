@@ -97,7 +97,8 @@ CREATE TABLE "employer_job_vacancies" (
 CREATE TABLE "job_requirements" (
     "id" SERIAL PRIMARY KEY,
     "education_level" education_level,
-    "age_range" INT[],
+    "age_range_upper" INT,
+    "age_range_lower" INT,
     "work_experience" INT
 );
 

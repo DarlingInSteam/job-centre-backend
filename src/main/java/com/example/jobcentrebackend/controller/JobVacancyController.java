@@ -24,10 +24,10 @@ public class JobVacancyController {
         }
     }
 
-    @GetMapping("/{job_title}")
-    public ResponseEntity getJobVacancy(@PathVariable String job_title) {
+    @GetMapping("/{job_id}")
+    public ResponseEntity getJobVacancy(@PathVariable Long job_id) {
         try {
-            return ResponseEntity.ok(service.getJobVacancy(job_title));
+            return ResponseEntity.ok(service.getJobVacancy(job_id));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

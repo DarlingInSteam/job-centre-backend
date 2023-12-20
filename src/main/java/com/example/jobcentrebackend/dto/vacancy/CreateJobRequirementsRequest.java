@@ -6,12 +6,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateJobRequirementsRequest {
     private EducationLevel educationLevel;
-    private int[] ageRange;
+    private int ageRangeUpper;
+    private int ageRangeLower;
     private int workExperience;
 }

@@ -54,6 +54,16 @@ public class UnemployedService {
         );
     }
 
+    public UnemployedDto getUnemployedById(Long id) throws UserNotFoundException, UnemployedNotFoundException {
+        return UnemployedDto.toDto(unemployedRepository
+                .findByUser(userRepository.findById(id)
+                        .orElseThrow(() -> new UserNotFoundException("User not found"))
+                )
+                .orElseThrow(() -> new UnemployedNotFoundException("Unemployed not found"))
+        );
+    }
+
+
     public List<UnemployedDto> getAllUnemployed() {
         var unemployedList = unemployedRepository.findAll();
         List<UnemployedDto> unemployedDtoList = new ArrayList<>();

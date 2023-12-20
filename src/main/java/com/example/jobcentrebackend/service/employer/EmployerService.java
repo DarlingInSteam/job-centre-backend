@@ -214,6 +214,30 @@ public class EmployerService {
         return "About company was successfully added";
     }
 
+    public String addCompanyName(String newName, Long id) throws EmployerNotFoundException {
+        var entity = employerRepository
+                .findById(id)
+                .orElseThrow(() -> new EmployerNotFoundException("Employer not found"));
+
+        entity.setEmployerName(newName);
+
+        employerRepository.save(entity);
+
+        return "Company name was successfully added";
+    }
+
+    public String addCompanyAddress(String newAddress, Long id) throws EmployerNotFoundException {
+        var entity = employerRepository
+                .findById(id)
+                .orElseThrow(() -> new EmployerNotFoundException("Employer not found"));
+
+        entity.setAddress(newAddress);
+
+        employerRepository.save(entity);
+
+        return "Company address was successfully added";
+    }
+
     public List<AppliesForVacancies> getAppliesForVacancies(String username) throws UserNotFoundException, EmployerNotFoundException {
         EmployerEntity employerEntity = employerRepository
                 .findByUser(userRepository.findByUsername(username)

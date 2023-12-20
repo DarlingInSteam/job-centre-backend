@@ -18,14 +18,16 @@ public class JobRequirementsDto {
     private long id;
     @Enumerated(STRING)
     private EducationLevel educationLevel;
-    private int[] ageRange;
+    private int ageRangeUpper;
+    private int ageRangeLower;
     private int workExperience;
 
     public static JobRequirementsDto toDto(JobRequirementEntity entity) {
         return JobRequirementsDto
                 .builder()
                 .id(entity.getId())
-                .ageRange(entity.getAgeRange())
+                .ageRangeUpper(entity.getAgeRangeUpper())
+                .ageRangeLower(entity.getAgeRangeLower())
                 .educationLevel(entity.getEducationLevel())
                 .workExperience(entity.getWorkExperience())
                 .build();

@@ -53,7 +53,8 @@ public class JobVacanciesService {
         JobRequirementEntity requirementEntity =  jobRequirementsRepository.save(JobRequirementEntity
                 .builder()
                 .educationLevel(request.getCreateJobRequirementsRequest().getEducationLevel())
-                .ageRange(request.getCreateJobRequirementsRequest().getAgeRange())
+                .ageRangeUpper(request.getCreateJobRequirementsRequest().getAgeRangeUpper())
+                .ageRangeLower(request.getCreateJobRequirementsRequest().getAgeRangeLower())
                 .workExperience(request.getCreateJobRequirementsRequest().getWorkExperience())
                 .build()
         );
@@ -77,12 +78,12 @@ public class JobVacanciesService {
         return "Vacancy was successfully created";
     }
 
-    public GetJobVacancyResponse getJobVacancy(String jobTitle) throws JobVacacyNotFoundException {
+    public GetJobVacancyResponse getJobVacancy(Long job_id) throws JobVacacyNotFoundException {
         JobVacancyEntity jobVacancyEntity = repository
-                .findByJobTitle(jobTitle)
+                .findById(job_id)
                     .orElseThrow(() -> new JobVacacyNotFoundException("Job vacancy not found"));
         JobRequirementEntity jobRequirementEntity = jobRequirementsRepository
-                .findById(repository.findByJobTitle(jobTitle).get().getRequirementsId())
+                .findById(repository.findById(job_id).get().getRequirementsId())
                     .orElseThrow(() -> new JobVacacyNotFoundException("Job vacancy not found"));
 
         return GetJobVacancyResponse.builder()
@@ -137,7 +138,8 @@ public class JobVacanciesService {
                 .findById(jobVacancyEntity.getRequirementsId())
                     .orElseThrow(() -> new JobRequirementsNotFound("Job Requirements not found"));
 
-        jobRequirementEntity.setAgeRange(request.getCreateJobRequirementsRequest().getAgeRange());
+        jobRequirementEntity.setAgeRangeUpper(request.getCreateJobRequirementsRequest().getAgeRangeUpper());
+        jobRequirementEntity.setAgeRangeLower(request.getCreateJobRequirementsRequest().getAgeRangeLower());
         jobRequirementEntity.setEducationLevel(request.getCreateJobRequirementsRequest().getEducationLevel());
         jobRequirementEntity.setWorkExperience(request.getCreateJobRequirementsRequest().getWorkExperience());
 
