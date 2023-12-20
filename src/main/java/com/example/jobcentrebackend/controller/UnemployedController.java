@@ -57,4 +57,22 @@ public class UnemployedController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @GetMapping("/invite_unemployed")
+    public ResponseEntity inviteUnemployed(@RequestParam Long unemployedId, @RequestParam Long vacancyId) {
+        try {
+            return ResponseEntity.ok(service.inviteUnemployed(vacancyId, unemployedId));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/access_invite")
+    public ResponseEntity accessInvite(@RequestParam Long unemployedId, @RequestParam Long vacancyId) {
+        try {
+            return ResponseEntity.ok(service.accessInvite(vacancyId, unemployedId));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

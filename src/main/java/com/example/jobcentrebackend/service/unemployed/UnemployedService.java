@@ -10,10 +10,12 @@ import com.example.jobcentrebackend.exception.unemployed.UnemployedAlreadyExists
 import com.example.jobcentrebackend.exception.unemployed.UnemployedNotFoundException;
 import com.example.jobcentrebackend.exception.user.UserHasInappropriateRole;
 import com.example.jobcentrebackend.exception.user.UserNotFoundException;
+import com.example.jobcentrebackend.exception.vacancy.JobVacacyNotFoundException;
 import com.example.jobcentrebackend.repository.passport.PassportRepository;
 import com.example.jobcentrebackend.repository.ability.AbilityRepository;
 import com.example.jobcentrebackend.repository.unemployed.UnemployedRepository;
 import com.example.jobcentrebackend.repository.user.UserRepository;
+import com.example.jobcentrebackend.repository.vacancy.JobVacanciesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -39,6 +41,9 @@ public class UnemployedService {
 
     @Autowired
     private AbilityRepository abilityRepository;
+
+    @Autowired
+    private JobVacanciesRepository jobVacanciesRepository;
 
     public UnemployedDto getUnemployedUsername(String username) throws UserNotFoundException, UnemployedNotFoundException {
         return UnemployedDto.toDto(unemployedRepository
@@ -143,5 +148,46 @@ public class UnemployedService {
         unemployedRepository.save(entity);
 
         return "Photo was successfully added";
+    }
+
+    public String inviteUnemployed(long vacancyId, long unemployedId) throws UnemployedNotFoundException, JobVacacyNotFoundException {
+        var unemployed = unemployedRepository
+                .findById(unemployedId)
+                .orElseThrow(() -> new UnemployedNotFoundException("Unemployed not found"));
+
+        var vacancy = jobVacanciesRepository
+                .findById(vacancyId)
+                .orElseThrow(() -> new JobVacacyNotFoundException("Job vacancy not found"));
+
+        var vacancies = unemployed.getEntities();
+
+        vacancies.add(vacancy);
+
+        unemployed.setEntities(vacancies);
+
+        unemployedRepository.save(unemployed);
+
+        return "Invite was successfully create";
+    }
+
+    public String accessInvite(long vacancyId, long unemployedId) throws UnemployedNotFoundException {
+        var unemployed = unemployedRepository
+                .findById(unemployedId)
+                .orElseThrow(() -> new UnemployedNotFoundException("Unemployed not found"));
+
+        var vacancies = unemployed.getEntities();
+
+        for (int i = 0; i < vacancies.size(); i++) {
+            if (vacancies.stream().toList().get(i).getId() == vacancyId) {
+                vacancies.remove(vacancies.stream().toList().get(i));
+                break;
+            }
+        }
+
+        unemployed.setEntities(vacancies);
+
+        unemployedRepository.save(unemployed);
+
+        return "Access was successfully create";
     }
 }

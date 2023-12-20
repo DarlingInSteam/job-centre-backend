@@ -38,6 +38,9 @@ public class JobVacancyEntity {
     private EmployerEntity employerEntity;
 
     @ManyToMany
+    private Set<EmployerEntity> employerEntityInvite;
+
+    @ManyToMany
     @JoinTable(
             name = "vacancies_apply_unemployed",
             joinColumns = @JoinColumn(name = "vacancy_id"),

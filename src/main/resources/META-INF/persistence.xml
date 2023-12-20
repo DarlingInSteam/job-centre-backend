@@ -13,6 +13,7 @@
     <class>com.example.jobcentrebackend.entity.vacancy.JobRequirementEntity</class>
     <class>com.example.jobcentrebackend.entity.vacancy.JobVacancyEntity</class>
     <class>com.example.jobcentrebackend.entity.vacancy.EmploymentHistoryEntity</class>
+    <class>com.example.jobcentrebackend.entity.specialist.SpecialistEntity</class>
     <class>com.example.jobcentrebackend.entity.ability.AbilityEntity</class>
   </persistence-unit>
     <persistence-unit name="persistenceUnit"/>

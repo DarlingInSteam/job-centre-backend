@@ -64,6 +64,14 @@ public class UnemployedEntity {
     @ManyToMany
     private Set<JobVacancyEntity> jobVacancyEntities;
 
+    @ManyToMany
+    @JoinTable(
+            name = "invite_vacancies",
+            joinColumns = @JoinColumn(name = "unemployed_id"),
+            inverseJoinColumns = @JoinColumn(name = "vacancy_id")
+    )
+    private Set<JobVacancyEntity> entities;
+
     @EqualsAndHashCode.Exclude
     @ManyToMany
     @JoinTable(

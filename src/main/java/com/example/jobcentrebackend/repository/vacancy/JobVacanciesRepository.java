@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface JobVacanciesRepository extends JpaRepository<JobVacancyEntity, Long> {
     Optional<JobVacancyEntity> findByJobTitle(String title);
+    Optional<JobVacancyEntity> findById(long id);
 }
