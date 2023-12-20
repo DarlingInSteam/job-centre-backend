@@ -12,7 +12,8 @@ CREATE TYPE "education_level" AS ENUM (
 
 CREATE TYPE "role" AS ENUM (
     'UNEMPLOYED',
-    'EMPLOYED'
+    'EMPLOYED',
+    'SPECIALIST'
     );
 
 CREATE TABLE "users" (
@@ -21,6 +22,12 @@ CREATE TABLE "users" (
     "phone" VARCHAR(20),
     "password" VARCHAR(100),
     "role" role
+);
+
+CREATE TABLE "specialist" (
+    "id" SERIAL PRIMARY KEY,
+    "user_id" BIGINT,
+    "full_name" TEXT
 );
 
 CREATE TABLE "password_reset_tokens" (
@@ -125,12 +132,6 @@ CREATE TABLE "job_title" (
     "title" TEXT
 );
 
-CREATE TABLE "specialist" (
-    "id" SERIAL PRIMARY KEY,
-    "user_id" BIGINT,
-    "full_name" TEXT
-);
-
 ALTER TABLE "unemployed_ability" ADD FOREIGN KEY ("unemployed_id") REFERENCES "unemployed" ("id");
 
 ALTER TABLE "unemployed_ability" ADD FOREIGN KEY ("ability_id") REFERENCES "ability" ("id");
@@ -146,6 +147,8 @@ ALTER TABLE "employer_job_vacancies" ADD FOREIGN KEY ("employer_id") REFERENCES 
 ALTER TABLE "employer_job_vacancies" ADD FOREIGN KEY ("vacancy_id") REFERENCES "job_vacancies" ("id");
 
 ALTER TABLE "password_reset_tokens" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+
+ALTER TABLE "specialist" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
 ALTER TABLE "job_vacancies" ADD FOREIGN KEY ("requirements_id") REFERENCES "job_requirements" ("id");
 
