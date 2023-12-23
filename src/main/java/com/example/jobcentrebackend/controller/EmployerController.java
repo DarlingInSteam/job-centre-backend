@@ -90,7 +90,7 @@ public class EmployerController {
     @PostMapping("/accept_unemployed")
     public ResponseEntity acceptUnemployed(@RequestBody AcceptUnemployedRequest request) {
         try {
-            return ResponseEntity.ok(service.acceptUnemployed(request.getVacancyId(), request.getUsernameEmployed(), request.getUsernameUnemployed()));
+            return ResponseEntity.ok(service.acceptUnemployed(request.getVacancyId(), request.getUsernameEmployed(), request.getUnemployedId()));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -99,7 +99,7 @@ public class EmployerController {
     @PostMapping("/reject_unemployed")
     public ResponseEntity rejectUnemployed(@RequestBody AcceptUnemployedRequest request) {
         try {
-            return ResponseEntity.ok(service.rejectUnemployed(request.getVacancyId(), request.getUsernameEmployed(), request.getUsernameUnemployed()));
+            return ResponseEntity.ok(service.rejectUnemployed(request.getVacancyId(), request.getUsernameEmployed(), request.getUnemployedId()));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

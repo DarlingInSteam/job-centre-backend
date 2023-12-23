@@ -1,5 +1,6 @@
 package com.example.jobcentrebackend.service.vacancy;
 
+import com.example.jobcentrebackend.dto.unemployed.UnemployedDto;
 import com.example.jobcentrebackend.dto.vacancy.CreateJobVacancyRequest;
 import com.example.jobcentrebackend.dto.vacancy.GetJobVacancyResponse;
 import com.example.jobcentrebackend.dto.vacancy.JobRequirementsDto;
@@ -20,8 +21,11 @@ import com.example.jobcentrebackend.repository.vacancy.JobVacanciesRepository;
 import com.example.jobcentrebackend.repository.employer.EmployerRepository;
 import com.example.jobcentrebackend.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -91,6 +95,34 @@ public class JobVacanciesService {
                 .jobRequirement(JobRequirementsDto.toDto(jobRequirementEntity))
                 .build();
 
+    }
+
+//    public List<UnemployedDto> getAllUnemployed() {
+//        var unemployedList = unemployedRepository.findAll();
+//        List<UnemployedDto> unemployedDtoList = new ArrayList<>();
+//
+//        for (var unemployed: unemployedList) {
+//            unemployedDtoList.add(UnemployedDto.toDto(unemployed));
+//        }
+//
+//        return unemployedDtoList;
+//    }
+
+    public List<GetJobVacancyResponse> getAllVacancy() throws JobRequirementsNotFound {
+        var vacancyList = repository.findAll();
+        List<JobVacanciesDto> jobVacanciesDto = new ArrayList<>();
+        List<JobRequirementsDto> jobRequirementsDto = new ArrayList<>();
+        List<GetJobVacancyResponse> getJobVacancyResponse = new ArrayList<>();
+
+        for (var vacancy: vacancyList) {
+            var a = JobVacanciesDto.toDto(vacancy);
+            var b = JobRequirementsDto.toDto(
+                    jobRequirementsRepository.findById(vacancy.getRequirementsId())
+                            .orElseThrow(() -> new JobRequirementsNotFound("Job Requirements Not Found")));
+            getJobVacancyResponse.add(new GetJobVacancyResponse(a, b));
+        }
+
+        return getJobVacancyResponse;
     }
 
     public String ApplyVacancyUnemployed(long vacancyId, String username) throws JobVacacyNotFoundException, UserNotFoundException, UnemployedNotFoundException {

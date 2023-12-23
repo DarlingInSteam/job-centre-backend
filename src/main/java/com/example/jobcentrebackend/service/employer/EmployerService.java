@@ -113,15 +113,14 @@ public class EmployerService {
         return "Employer was successfully created";
     }
 
-    public String acceptUnemployed(long vacancyId, String usernameEmployed, String usernameUnemployed) throws UserNotFoundException, EmployerNotFoundException, UnemployedNotFoundException {
+    public String acceptUnemployed(long vacancyId, String usernameEmployed, Long unemployedId) throws UserNotFoundException, EmployerNotFoundException, UnemployedNotFoundException {
         EmployerEntity employerEntity = employerRepository
                 .findByUser(userRepository.findByUsername(usernameEmployed)
                         .orElseThrow(() -> new UserNotFoundException("User not found")))
                 .orElseThrow(() -> new EmployerNotFoundException("Employer not found"));
 
         UnemployedEntity unemployedEntity = unemployedRepository
-                .findByUser(userRepository.findByUsername(usernameUnemployed)
-                        .orElseThrow(() -> new UserNotFoundException("User not found")))
+                .findById(unemployedId)
                 .orElseThrow(() -> new UnemployedNotFoundException("Unemployed not found"));
 
         List<JobVacancyEntity> vacancies = employerEntity.getJobVacancyEntity().stream().toList();
@@ -162,15 +161,14 @@ public class EmployerService {
         return "Unemployed was successfully applied";
     }
 
-    public String rejectUnemployed(long vacancyId, String usernameEmployed, String usernameUnemployed) throws UserNotFoundException, EmployerNotFoundException, UnemployedNotFoundException {
+    public String rejectUnemployed(long vacancyId, String usernameEmployed, Long unemployedId) throws UserNotFoundException, EmployerNotFoundException, UnemployedNotFoundException {
         EmployerEntity employerEntity = employerRepository
                 .findByUser(userRepository.findByUsername(usernameEmployed)
                         .orElseThrow(() -> new UserNotFoundException("User not found")))
                 .orElseThrow(() -> new EmployerNotFoundException("Employer not found"));
 
         UnemployedEntity unemployedEntity = unemployedRepository
-                .findByUser(userRepository.findByUsername(usernameUnemployed)
-                        .orElseThrow(() -> new UserNotFoundException("User not found")))
+                .findById(unemployedId)
                 .orElseThrow(() -> new UnemployedNotFoundException("Unemployed not found"));
 
         List<JobVacancyEntity> vacancies = employerEntity.getJobVacancyEntity().stream().toList();

@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class AcceptUnemployedRequest {
     long vacancyId;
     String usernameEmployed;
-    String usernameUnemployed;
+    Long unemployedId;
 }
